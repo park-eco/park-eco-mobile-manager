@@ -16,6 +16,36 @@ import styles from "./style";
 const drawerCover = require("../../../assets/drawer-cover.png");
 const drawerImage = require("../../../assets/logo-kitchen-sink.png");
 const datas = [
+  {
+    name: "LiveTracking",
+    route: "LiveTracking",
+    icon: "phone-portrait",
+    bg: "#C5F442"
+  },
+  {
+    name: "HumanResource",
+    route: "HumanResource",
+    icon: "phone-portrait",
+    bg: "#C5F442"
+  },
+  {
+    name: "TheParking",
+    route: "TheParking",
+    icon: "phone-portrait",
+    bg: "#C5F442"
+  },
+  {
+    name: "Revenue",
+    route: "Revenue",
+    icon: "phone-portrait",
+    bg: "#C5F442"
+  },
+  {
+    name: "Report",
+    route: "Report",
+    icon: "phone-portrait",
+    bg: "#C5F442"
+  },
 ];
 
 class SideBar extends Component {

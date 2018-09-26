@@ -2,16 +2,26 @@ import React from "react";
 import { Root } from "native-base";
 import { StackNavigator, DrawerNavigator } from "react-navigation";
 
-import Home from "./screens/home";
 import SideBar from "./screens/sidebar";
+import Login from "./screens/login";
+import LiveTracking from "./screens/liveTracking";
+import HumanResource from "./screens/humanResource";
+import TheParking from "./screens/theParking";
+import Revenue from "./screens/revenue";
+import Report from "./screens/report";
+
 
 // init DrawerNavigator
 const Drawer = DrawerNavigator(
     {
-        Home: { screen: Home },
+        LiveTracking: { screen: LiveTracking },
+        HumanResource: { screen: HumanResource },
+        TheParking: { screen: TheParking },
+        Revenue: { screen: Revenue },
+        Report: { screen: Report },
     },
     {
-        initialRouteName: "Home",
+        initialRouteName: "LiveTracking",
         contentOptions: {
             activeTintColor: "e91e63"
         },
@@ -19,21 +29,20 @@ const Drawer = DrawerNavigator(
     }
 );
 
-
 // init StackNavigator
 const AppNavigator = StackNavigator(
     {
         Drawer: { screen: Drawer },
-
-
+        Login: { screen: Login },
     },
     {
-        initialRouteName: "Drawer",
+        initialRouteName: "Login",
         headerMode: "none"
     }
 );
 
+
 export default () =>
-  <Root>
-    <AppNavigator />
-  </Root>;
+    <Root>
+        <AppNavigator />
+    </Root>;
