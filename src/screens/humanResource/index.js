@@ -7,8 +7,6 @@ import {
   Text,
   Button,
   Icon,
-  Footer,
-  FooterTab,
   Left,
   Right,
   Body
@@ -38,14 +36,6 @@ class HumanResource extends Component {
 				<Content padder>
 					<Text>Content goes here</Text>
 				</Content>
-
-				<Footer>
-					<FooterTab>
-						<Button active full>
-							<Text>Footer</Text>
-						</Button>
-					</FooterTab>
-				</Footer>
 			</Container>
 		);
 	}

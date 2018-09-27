@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import BottomNavigation, { FullTab } from 'react-native-material-bottom-navigation';
 import {
   Container,
   Header,
@@ -7,16 +8,44 @@ import {
   Text,
   Button,
   Icon,
-  Footer,
-  FooterTab,
   Left,
   Right,
-  Body
+  Body,
 } from "native-base";
 
 import styles from "./styles";
 
 class LiveTracking extends Component {
+  tabs = [
+    {
+      key: 'listViewMode',
+      icon: 'list-alt',
+      label: 'List Mode',
+      barColor: '#388E3C',
+      pressColor: 'rgba(255, 255, 255, 0.16)'
+    },
+    {
+      key: 'mapViewMode',
+      icon: 'map',
+      label: 'Map Mode',
+      barColor: '#E64A19',
+      pressColor: 'rgba(255, 255, 255, 0.16)'
+    }
+  ]
+
+  renderIcon = icon => ({ isActive }) => (
+    <Icon type="FontAwesome" style={{ color: "white", fontSize: 20 }} name={icon} />
+  )
+
+  renderTab = ({ tab, isActive }) => (
+    <FullTab
+      isActive={isActive}
+      key={tab.key}
+      label={tab.label}
+      renderIcon={this.renderIcon(tab.icon)}
+    />
+  )
+
   render() {
     return (
       <Container style={styles.container}>
@@ -39,13 +68,11 @@ class LiveTracking extends Component {
           <Text>Content goes here</Text>
         </Content>
 
-        <Footer>
-          <FooterTab>
-            <Button active full>
-              <Text>Footer</Text>
-            </Button>
-          </FooterTab>
-        </Footer>
+        <BottomNavigation
+          onTabPress={newTab => this.setState({ activeTab: newTab.key })}
+          renderTab={this.renderTab}
+          tabs={this.tabs}
+        />
       </Container>
     );
   }
