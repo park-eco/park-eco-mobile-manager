@@ -8,6 +8,7 @@ import LoginButton from "./loginButton";
 import KInput from "./input";
 import Banner from "./banner";
 import ServerInput from "./serverInput";
+import ForgotPassword from "./forgotPassword";
 
 const background = require("../../../assets/background-login1.jpg");
 const logo = require("../../../assets/icon-Parking-Systems.jpg");
@@ -31,16 +32,12 @@ class Login extends Component {
 		this.password.clearInput();
 	}
 
-	forgotPassword = () => {
-
-	}
-
 	render() {
 		return (
 			<Container style={styles.container}>
 				<Background source={background}/>
-				<Banner source={logo}/>
-				<ServerInput/>
+				<Banner source={logo} style={{ marginTop: 30 }}/>
+				<ServerInput style={{ marginTop: 15, marginBottom:30, justifyContent: 'center', alignItems: 'center' }}/>
 
 				<View  style={{ alignItems: "center" }}>
 					<Form>
@@ -55,17 +52,8 @@ class Login extends Component {
 						onRef={ (ref) => this.loginButton = ref }
 						onPress={this.onPress}
 					/>	
-
-					<TouchableOpacity 	onPress={this.forgotPassword} 
-										activeOpacity={0.4} 
-										style={{ alignItems: 'center' }}>
-						<Text style={{ 	color: "white", 
-										fontSize: 14, 
-										backgroundColor: "transparent",
-										textDecorationLine: "underline" }}>Forgot your password?</Text>
-					</TouchableOpacity>
 				</View>
-
+				<ForgotPassword style={{ marginTop: 90 }}/>
 			</Container>
 		);
 	}

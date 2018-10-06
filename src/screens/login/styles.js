@@ -31,13 +31,24 @@ export default {
     fontFamily: "Verdana-Bold",
     fontSize: 36,
     fontWeight: "bold",
-    textAlign: "center"
+    textAlign: "center",
   },
   logoCircle: {
     alignSelf: 'center',
     height: 150,
     width: 150,
     borderWidth: 1,
-    borderRadius: 75
+    borderRadius: 75,
+  },
+  statusServer: {
+    color: "white", 
+    marginLeft: 10, 
+    fontStyle: "italic"
+  },
+  forgotPassword: {
+    color: "rgba(255, 255, 255, .7)",
+    fontSize: 14,
+    backgroundColor: "transparent",
+    textDecorationLine: "underline"
   }
 };
