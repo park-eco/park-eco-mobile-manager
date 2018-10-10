@@ -4,13 +4,11 @@ import { Container } from "native-base";
 
 import styles from "./styles";
 
-const background = require("../../../assets/backgroundLogin2.jpg");
-
 class Background extends Component {
 	render() {
 		return (
 			<Container style={styles.containerBackground}>
-				<Image source={background} style={styles.background} />
+				<Image source={this.props.source} style={styles.background} />
 			</Container>
 		);
 	}
