@@ -11,25 +11,36 @@ import {
   Left,
   Right,
   Body,
+
 } from "native-base";
 
 import styles from "./styles";
 
+import ItemListView from "./itemListView";
+
 class LiveTracking extends Component {
+  constructor() {
+    super();
+    this.state = {
+      activeTab: "listViewMode",
+    };
+    this.arr = ["1", "2", "3"];
+  }
+
   tabs = [
     {
-      key: 'listViewMode',
-      icon: 'list-alt',
-      label: 'List Mode',
-      barColor: '#388E3C',
-      pressColor: 'rgba(255, 255, 255, 0.16)'
+      key: "listViewMode",
+      icon: "list-alt",
+      label: "List Mode",
+      barColor: "#388E3C",
+      pressColor: "rgba(255, 255, 255, 0.16)"
     },
     {
-      key: 'mapViewMode',
-      icon: 'map',
-      label: 'Map Mode',
-      barColor: '#E64A19',
-      pressColor: 'rgba(255, 255, 255, 0.16)'
+      key: "mapViewMode",
+      icon: "map",
+      label: "Map Mode",
+      barColor: "#E64A19",
+      pressColor: "rgba(255, 255, 255, 0.16)"
     }
   ]
 
@@ -64,12 +75,27 @@ class LiveTracking extends Component {
           <Right />
         </Header>
 
-        <Content padder>
-          <Text>Content goes here</Text>
-        </Content>
+        {this.state.activeTab == "listViewMode" &&
+          <Content>
+            {this.arr.map( element => {
+              return (
+                <ItemListView key={element} name="Công viên Lê Thị Riêng" address="12, Cộng Hoà, Tân Bình, Tp.HCM"></ItemListView>
+              );
+            })}
+          </Content>
+        }
+
+        {this.state.activeTab == "mapViewMode" &&
+          <Content>
+           <Text>Content goes mapViewMode</Text>
+          </Content>
+        }
 
         <BottomNavigation
-          onTabPress={newTab => this.setState({ activeTab: newTab.key })}
+          onTabPress={newTab => {
+            this.setState({ activeTab: newTab.key });
+            console.log(this.state.activeTab);
+          } }
           renderTab={this.renderTab}
           tabs={this.tabs}
         />
