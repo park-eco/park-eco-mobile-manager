@@ -23,8 +23,39 @@ class LiveTracking extends Component {
     super();
     this.state = {
       activeTab: "listViewMode",
+      data: [{
+        id: "1",
+        nameTheParking: "Công viên Hoàng Văn Thụ",
+        status: 20,
+        idWorkingEmployee: "333",
+        nameWorkingEmployee: "Lee Khai",
+        phoneNumberWorkingEmployee: "0328372201"
+      },
+      {
+        id: "2",
+        nameTheParking: "Công viên Văn hoá Đầm Sen",
+        status: 95,
+        idWorkingEmployee: "334",
+        nameWorkingEmployee: "Vo Ngoc",
+        phoneNumberWorkingEmployee: "0328372202"
+      },
+      {
+        id: "3",
+        nameTheParking: "Trường Đại học Công nghệ Thông tin, Đại học Quốc gia Thành phố Hồ Chí Minh",
+        status: 20,
+        idWorkingEmployee: "335",
+        nameWorkingEmployee: "Huynh Kim",
+        phoneNumberWorkingEmployee: "0328372203"
+      },
+      {
+        id: "4",
+        nameTheParking: "Siêu thị Co.opXtra Thủ Đức",
+        status: 70,
+        idWorkingEmployee: "336",
+        nameWorkingEmployee: "Lee Tuan",
+        phoneNumberWorkingEmployee: "0328372204"
+      }]
     };
-    this.arr = ["1", "2", "3"];
   }
 
   tabs = [
@@ -77,9 +108,14 @@ class LiveTracking extends Component {
 
         {this.state.activeTab == "listViewMode" &&
           <Content>
-            {this.arr.map( element => {
+            {this.state.data.map( data => {
               return (
-                <ItemListView key={element} name="Công viên Lê Thị Riêng" address="12, Cộng Hoà, Tân Bình, Tp.HCM"></ItemListView>
+                <ItemListView key={data.id} 
+                              nameTheParking={data.nameTheParking} 
+                              status={data.status}
+                              nameWorkingEmployee={data.nameWorkingEmployee}
+                              phoneNumberWorkingEmployee={data.phoneNumberWorkingEmployee}>
+                </ItemListView>
               );
             })}
           </Content>
