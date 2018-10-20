@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import BottomNavigation, { FullTab } from 'react-native-material-bottom-navigation';
+import { COLOR } from 'react-native-material-ui';
 import {
   Container,
   Header,
@@ -17,6 +18,7 @@ import {
 import styles from "./styles";
 
 import ItemListView from "./itemListView";
+import Searchbar from "./searchbar";
 
 class LiveTracking extends Component {
   constructor() {
@@ -58,20 +60,28 @@ class LiveTracking extends Component {
     };
   }
 
+  sortByStatusIncrease = () => {
+    this.setState({ data: this.state.data.sort( (a, b) => a.status - b.status ) });
+  }
+
+  sortByStatusDecrease = () => {
+    this.setState({ data: this.state.data.sort( (a, b) => b.status - a.status ) });
+  }
+
   tabs = [
     {
       key: "listViewMode",
       icon: "list-alt",
       label: "List Mode",
-      barColor: "#388E3C",
-      pressColor: "rgba(255, 255, 255, 0.16)"
+      barColor: COLOR.blue400,
+      pressColor: COLOR.lightBlue400
     },
     {
       key: "mapViewMode",
       icon: "map",
       label: "Map Mode",
-      barColor: "#E64A19",
-      pressColor: "rgba(255, 255, 255, 0.16)"
+      barColor: COLOR.blue400,
+      pressColor: COLOR.lightBlue400
     }
   ]
 
@@ -91,7 +101,7 @@ class LiveTracking extends Component {
   render() {
     return (
       <Container style={styles.container}>
-        <Header>
+        {/* <Header>
           <Left>
             <Button
               transparent
@@ -104,8 +114,13 @@ class LiveTracking extends Component {
             <Title>Live Tracking</Title>
           </Body>
           <Right />
-        </Header>
+        </Header> */}
 
+        <Searchbar  data={this.state.data} 
+                    sortByStatusIncrease={this.sortByStatusIncrease}
+                    sortByStatusDecrease={this.sortByStatusDecrease}/>
+        
+        
         {this.state.activeTab == "listViewMode" &&
           <Content>
             {this.state.data.map( data => {
@@ -130,7 +145,6 @@ class LiveTracking extends Component {
         <BottomNavigation
           onTabPress={newTab => {
             this.setState({ activeTab: newTab.key });
-            console.log(this.state.activeTab);
           } }
           renderTab={this.renderTab}
           tabs={this.tabs}

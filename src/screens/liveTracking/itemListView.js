@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { COLOR } from 'react-native-material-ui';
 import {
 	Content,
 	Card,
@@ -44,7 +45,7 @@ class ItemListView extends Component {
 							</Body>
 							<Right>
 								<Icon active name="circle" type="FontAwesome" 
-											style={{ color: (this.props.status < 50) ? "green" : ( (this.props.status < 80) ? "yellow" : "red" ) }} />
+											style={{ color: (this.props.status < 50) ? COLOR.green500 : ( (this.props.status < 80) ? COLOR.yellow500 : COLOR.red500 ) }} />
 							</Right>
 						</ListItem>
 						<ListItem icon>
@@ -56,7 +57,7 @@ class ItemListView extends Component {
 							</Body>
 							<Right>
 								<Button onPress={ () => this.onPress(this.props.phoneNumberWorkingEmployee) }	
-												style={{ backgroundColor: "blue", width: 30, height: 30 }}>
+												style={{ backgroundColor: COLOR.blue500, width: 30, height: 30 }}>
 									<Icon active name="call" style={{ width: 30, height: 30, marginLeft: 7 }} />
 								</Button>
 							</Right>
