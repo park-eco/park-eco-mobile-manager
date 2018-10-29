@@ -13,8 +13,8 @@ import {
 } from "native-base";
 import styles from "./style";
 
-const drawerCover = require("../../../assets/drawer-cover.png");
-const drawerImage = require("../../../assets/logo-kitchen-sink.png");
+const drawerCover = require("../../../assets/background-login1.jpg");
+const drawerImage = require("../../../assets/icon-Parking-Systems.jpg");
 const datas = [
   {
     name: "LiveTracking",

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Container, View, Form, Text } from "native-base";
-import { TouchableOpacity } from "react-native";
+import { Container, View, Form } from "native-base";
+
 
 import styles from "./styles";
 import Background from "./background";
