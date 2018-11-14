@@ -1,17 +1,11 @@
 import React, { Component } from "react";
+import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import BottomNavigation, { FullTab } from 'react-native-material-bottom-navigation';
 import { COLOR } from 'react-native-material-ui';
 import {
   Container,
-  Header,
-  Title,
   Content,
-  Text,
-  Button,
   Icon,
-  Left,
-  Right,
-  Body,
 
 } from "native-base";
 
@@ -61,11 +55,11 @@ class LiveTracking extends Component {
   }
 
   sortByStatusIncrease = () => {
-    this.setState({ data: this.state.data.sort( (a, b) => a.status - b.status ) });
+    this.setState({ data: this.state.data.sort((a, b) => a.status - b.status) });
   }
 
   sortByStatusDecrease = () => {
-    this.setState({ data: this.state.data.sort( (a, b) => b.status - a.status ) });
+    this.setState({ data: this.state.data.sort((a, b) => b.status - a.status) });
   }
 
   tabs = [
@@ -101,35 +95,21 @@ class LiveTracking extends Component {
   render() {
     return (
       <Container style={styles.container}>
-        {/* <Header>
-          <Left>
-            <Button
-              transparent
-              onPress={() => this.props.navigation.openDrawer()}
-            >
-              <Icon name="ios-menu" />
-            </Button>
-          </Left>
-          <Body>
-            <Title>Live Tracking</Title>
-          </Body>
-          <Right />
-        </Header> */}
 
-        <Searchbar  data={this.state.data} 
-                    sortByStatusIncrease={this.sortByStatusIncrease}
-                    sortByStatusDecrease={this.sortByStatusDecrease}/>
-        
-        
+        <Searchbar data={this.state.data}
+          sortByStatusIncrease={this.sortByStatusIncrease}
+          sortByStatusDecrease={this.sortByStatusDecrease} />
+
+
         {this.state.activeTab == "listViewMode" &&
           <Content>
-            {this.state.data.map( data => {
+            {this.state.data.map(data => {
               return (
-                <ItemListView key={data.id} 
-                              nameTheParking={data.nameTheParking} 
-                              status={data.status}
-                              nameWorkingEmployee={data.nameWorkingEmployee}
-                              phoneNumberWorkingEmployee={data.phoneNumberWorkingEmployee}>
+                <ItemListView key={data.id}
+                  nameTheParking={data.nameTheParking}
+                  status={data.status}
+                  nameWorkingEmployee={data.nameWorkingEmployee}
+                  phoneNumberWorkingEmployee={data.phoneNumberWorkingEmployee}>
                 </ItemListView>
               );
             })}
@@ -138,14 +118,21 @@ class LiveTracking extends Component {
 
         {this.state.activeTab == "mapViewMode" &&
           <Content>
-           <Text>Content goes mapViewMode</Text>
+            <MapView style={styles.mapView}
+              initialRegion={{
+                latitude: 37.78825,
+                longitude: -122.4324,
+                latitudeDelta: 0.0922,
+                longitudeDelta: 0.0421,
+              }}
+            />
           </Content>
         }
 
         <BottomNavigation
           onTabPress={newTab => {
             this.setState({ activeTab: newTab.key });
-          } }
+          }}
           renderTab={this.renderTab}
           tabs={this.tabs}
         />
