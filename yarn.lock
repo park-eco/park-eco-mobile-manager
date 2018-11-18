@@ -4925,6 +4925,11 @@ react-native-keyboard-aware-scroll-view@0.5.0:
     prop-types "^15.6.0"
     react-native-iphone-x-helper "^1.0.1"
 
+react-native-maps@^0.22.1:
+  version "0.22.1"
+  resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-0.22.1.tgz#ce856e71970e872e596e6fa4773279cae2c4dcdd"
+  integrity sha512-JjBpAXjzZY8AW4HTcAZxX+cGk6e6i+J5Vd//DViMUe0bRkKKv92ds1W9rqZ+o9PhUqdP++3DvKv0jrB05icqKA==
+
 react-native-material-bottom-navigation@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/react-native-material-bottom-navigation/-/react-native-material-bottom-navigation-1.0.1.tgz#da5d2f9cfe2a59ee9509275de1b57d505b204efc"
@@ -4967,11 +4972,6 @@ react-native-phone-call@^1.0.9:
   version "1.0.9"
   resolved "https://registry.yarnpkg.com/react-native-phone-call/-/react-native-phone-call-1.0.9.tgz#4468ec6f95856557fbff9bd69a0db04b54c35e1d"
   integrity sha512-OPWYg8qeWNG/U4bWGMAKcQTH/ifqJnsvUPCH4lOkvWFHbQS3fbH5M8rFhXCzcfS0GVNzHhZX9ZByMM368TFAUQ==
-
-react-native-popup-menu@^0.14.0:
-  version "0.14.0"
-  resolved "https://registry.yarnpkg.com/react-native-popup-menu/-/react-native-popup-menu-0.14.0.tgz#8a11e4a78f76f5883fa5eb9d736f0ec2df8765ce"
-  integrity sha1-ihHkp4929Yg/peudc28Owt+HZc4=
 
 react-native-restart@0.0.7:
   version "0.0.7"
