@@ -13,6 +13,7 @@ import styles from "./styles";
 
 import ItemListView from "./itemListView";
 import Searchbar from "./searchbar";
+import MapViewMode from "./mapViewMode";
 
 class LiveTracking extends Component {
   constructor() {
@@ -126,6 +127,7 @@ class LiveTracking extends Component {
                 longitudeDelta: 0.0421,
               }}
             />
+            <MapViewMode></MapViewMode>
           </Content>
         }
 
