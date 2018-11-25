@@ -10,6 +10,7 @@
     "native-base": "^2.8.0",
     "react": "16.5.0",
     "react-native": "0.57.1",
+    "react-native-chart-kit": "^1.2.0",
     "react-native-dialog": "^5.4.0",
     "react-native-maps": "^0.22.1",
     "react-native-material-bottom-navigation": "^1.0.1",
