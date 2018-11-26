@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Dimensions, ScrollView } from "react-native";
+import { Dimensions, ScrollView, View, TextInput, TouchableOpacity } from "react-native";
 import {
 	Container,
 	Header,
@@ -17,9 +17,9 @@ import {
 	BarChart,
 	PieChart,
 } from "react-native-chart-kit";
-
-import styles from "./styles";
 import { data, pieChartData } from "./data";
+import Picker from 'react-native-picker';
+import styles from "./styles";
 
 const chartConfig = {
 	backgroundColor: '#0091EA',
@@ -29,12 +29,52 @@ const chartConfig = {
 }
 
 class Report extends Component {
+	constructor(props, context) {
+		super(props, context);
+	}
+
+	_createParkingData() {
+		let data = [];
+		for (var i = 0; i < 100; i++) {
+			data.push(i);
+		}
+
+		return data;
+	}
+
+	_showParkingPicker() {
+		Picker.init({
+			pickerData: this._createParkingData(),
+			selectedValue: [59],
+			onPickerConfirm: data => {
+				console.log(data);
+			},
+			onPickerCancel: data => {
+				console.log(data);
+			},
+			onPickerSelect: data => {
+				console.log(data);
+			}
+		});
+
+		Picker.show();
+	}
+
+	_toggle() {
+		Picker.toggle();
+	}
+
+	_isPickerShow() {
+		Picker.isPickerShow(status => {
+			alert(status);
+		});
+	}
+
 	render() {
-		const width = Dimensions.get('window').width * 0.93;
+		const width = Dimensions.get('window').width * 0.94;
 		const height = 220;
 
 		const labelStyle = {
-			// color: chartConfig.color(),
 			marginVertical: 10,
 			textAlign: 'center',
 			fontSize: 16
@@ -63,10 +103,32 @@ class Report extends Component {
 				</Header>
 
 				<Content padder>
+					<View style={{ height: Dimensions.get('window').height }}>
+						<TouchableOpacity style={{ marginTop: 40, marginLeft: 20 }} onPress={this._showParkingPicker.bind(this)}>
+							<Text>ParkingPicker</Text>
+						</TouchableOpacity>
+						<TouchableOpacity style={{ marginTop: 10, marginLeft: 20 }} onPress={this._toggle.bind(this)}>
+							<Text>toggle</Text>
+						</TouchableOpacity>
+						<TouchableOpacity style={{ marginTop: 10, marginLeft: 20 }} onPress={this._isPickerShow.bind(this)}>
+							<Text>isPickerShow</Text>
+						</TouchableOpacity>
+						<TextInput
+							placeholder="test picker with input"
+							style={{
+								height: 40,
+								borderColor: 'gray',
+								borderWidth: 1,
+								marginLeft: 20,
+								marginRight: 20,
+								marginTop: 10,
+								padding: 5
+							}}
+						/>
+					</View>
 					<ScrollView
-						style={{
-							// backgroundColor: chartConfig.backgroundColor
-						}}
+						showsVerticalScrollIndicator={false}
+						showsHorizontalScrollIndicator={false}
 					>
 						<Text style={labelStyle}>Bezier Line Chart</Text>
 						<LineChart
