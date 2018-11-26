@@ -31,6 +31,9 @@ const chartConfig = {
 class Report extends Component {
 	constructor(props, context) {
 		super(props, context);
+		this.state = {
+			selectedParking: this._createParkingData()[0],
+		}
 	}
 
 	_createParkingData() {
@@ -45,34 +48,26 @@ class Report extends Component {
 	_showParkingPicker() {
 		Picker.init({
 			pickerData: this._createParkingData(),
-			selectedValue: [59],
+			selectedValue: [0],
 			onPickerConfirm: data => {
-				console.log(data);
+				this.setState({ selectedParking: data });
 			},
 			onPickerCancel: data => {
-				console.log(data);
 			},
 			onPickerSelect: data => {
-				console.log(data);
 			}
 		});
 
 		Picker.show();
 	}
-
-	_toggle() {
-		Picker.toggle();
-	}
-
-	_isPickerShow() {
-		Picker.isPickerShow(status => {
-			alert(status);
-		});
-	}
+	
 
 	render() {
-		const width = Dimensions.get('window').width * 0.94;
-		const height = 220;
+		const width = Dimensions.get('window').width
+		const height = Dimensions.get('window').height
+
+		const widthChart = width * 0.94
+		const heightChart = 220
 
 		const labelStyle = {
 			marginVertical: 10,
@@ -102,70 +97,124 @@ class Report extends Component {
 					<Right />
 				</Header>
 
-				<Content padder>
-					<View style={{ height: Dimensions.get('window').height }}>
-						<TouchableOpacity style={{ marginTop: 40, marginLeft: 20 }} onPress={this._showParkingPicker.bind(this)}>
-							<Text>ParkingPicker</Text>
-						</TouchableOpacity>
-						<TouchableOpacity style={{ marginTop: 10, marginLeft: 20 }} onPress={this._toggle.bind(this)}>
-							<Text>toggle</Text>
-						</TouchableOpacity>
-						<TouchableOpacity style={{ marginTop: 10, marginLeft: 20 }} onPress={this._isPickerShow.bind(this)}>
-							<Text>isPickerShow</Text>
-						</TouchableOpacity>
-						<TextInput
-							placeholder="test picker with input"
+				<View style={{ margin: 5, flex: 1, maxHeight: height * 0.25 }}>
+					<View style={{
+						flexDirection: 'row',
+						alignItems: 'center',
+						justifyContent: 'space-between',
+					}}>
+						<Button iconRight
 							style={{
-								height: 40,
-								borderColor: 'gray',
-								borderWidth: 1,
-								marginLeft: 20,
-								marginRight: 20,
-								marginTop: 10,
-								padding: 5
+								backgroundColor: chartConfig.backgroundColor,
+								width: width * 0.66,
+								marginRight: 0
 							}}
-						/>
+							onPress={this._showParkingPicker.bind(this)}>
+							<Text>{this.state.selectedParking}</Text>
+							<Icon name='arrow-down' />
+						</Button>
+
+						<Button iconRight
+							style={{
+								backgroundColor: chartConfig.backgroundColor,
+								width: width * 0.3,
+							}}
+							onPress={this._showParkingPicker.bind(this)}>
+							<Text>{this.state.selectedParking}</Text>
+							<Icon name='arrow-down' />
+						</Button>
 					</View>
+					<View style={{
+						marginTop: 5,
+						flexDirection: 'row',
+						alignItems: 'center',
+						justifyContent: 'space-between',
+					}}>
+						<Button iconRight
+							style={{
+								backgroundColor: chartConfig.backgroundColor,
+								width: width * 0.48,
+							}}
+							onPress={this._showParkingPicker.bind(this)}>
+							<Text>{this.state.selectedParking}</Text>
+							<Icon name='arrow-down' />
+						</Button>
+
+						<Button iconRight
+							style={{
+								backgroundColor: chartConfig.backgroundColor,
+								width: width * 0.48,
+							}}
+							onPress={this._showParkingPicker.bind(this)}>
+							<Text>{this.state.selectedParking}</Text>
+							<Icon name='arrow-down' />
+						</Button>
+					</View>
+					<View style={{
+						marginTop: 5,
+						flexDirection: 'row',
+						alignItems: 'center',
+						justifyContent: 'center',
+					}}>
+						<Button iconRight
+							style={{
+								backgroundColor: chartConfig.backgroundColor,
+								width: width * 0.5,
+								marginRight: 2,
+								alignItems: 'center',
+								justifyContent: 'center',
+							}}
+							onPress={this._showParkingPicker.bind(this)}>
+							<Text style={{ fontWeight: 'bold' }}>VIEW CHART</Text>
+							<Icon name='chart-bar' type='MaterialCommunityIcons' />
+						</Button>
+					</View>
+				</View>
+
+				<Content padder>
 					<ScrollView
 						showsVerticalScrollIndicator={false}
 						showsHorizontalScrollIndicator={false}
 					>
-						<Text style={labelStyle}>Bezier Line Chart</Text>
 						<LineChart
 							data={data}
-							width={width}
-							height={height}
+							width={widthChart}
+							height={heightChart}
 							chartConfig={chartConfig}
 							bezier
 							style={graphStyle}
 						/>
-						<Text style={labelStyle}>Bar Graph</Text>
+						<Text style={labelStyle}>Bezier Line Chart</Text>
+
 						<BarChart
-							width={width}
-							height={height}
+							width={widthChart}
+							height={heightChart}
 							data={data}
 							chartConfig={chartConfig}
 							style={graphStyle}
 						/>
-						<Text style={labelStyle}>Pie Chart</Text>
+						<Text style={labelStyle}>Bar Graph</Text>
+
 						<PieChart
 							data={pieChartData}
-							height={height}
-							width={width}
+							height={heightChart}
+							width={widthChart}
 							chartConfig={chartConfig}
 							accessor="population"
 							style={graphStyle}
 							backgroundColor='#546E7A'
 							paddingLeft="15"
 						/>
-						<Text style={labelStyle}>Line Chart</Text>
+						<Text style={labelStyle}>Pie Chart</Text>
+
 						<LineChart
 							data={data}
-							width={width}
-							height={height}
+							width={widthChart}
+							height={heightChart}
 							chartConfig={chartConfig}
 							style={graphStyle}
 						/>
+						<Text style={labelStyle}>Line Chart</Text>
 					</ScrollView>
 				</Content>
 			</Container>
