@@ -12,11 +12,6 @@ import {
 	Right,
 	Body,
 } from 'native-base';
-import {
-	LineChart,
-	BarChart,
-	PieChart,
-} from 'react-native-chart-kit';
 import { data, pieChartData } from './data';
 import Picker from 'react-native-picker';
 
@@ -249,7 +244,7 @@ class Report extends Component {
 					<ScrollView
 						showsVerticalScrollIndicator={false}
 						showsHorizontalScrollIndicator={false}>
-						
+
 						<AllParkingChart
 							data={pieChartData}
 							height={heightChart}
@@ -257,7 +252,8 @@ class Report extends Component {
 							chartConfig={chartConfig}
 							style={graphStyle}
 							labelStyle={labelStyle}
-							label={'All Parkings Daily Chart'}>
+							labelChart={'All Parkings Daily Chart'}
+							labelTable={'All Parkings Detailed Statistics Table'}>
 						</AllParkingChart>
 
 						<DailyChart
