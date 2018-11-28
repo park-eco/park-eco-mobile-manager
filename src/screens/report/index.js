@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Dimensions, ScrollView, View } from "react-native";
+import React, { Component } from 'react';
+import { Dimensions, ScrollView, View } from 'react-native';
 import {
 	Container,
 	Header,
@@ -11,15 +11,21 @@ import {
 	Left,
 	Right,
 	Body,
-} from "native-base";
+} from 'native-base';
 import {
 	LineChart,
 	BarChart,
 	PieChart,
-} from "react-native-chart-kit";
-import { data, pieChartData } from "./data";
+} from 'react-native-chart-kit';
+import { data, pieChartData } from './data';
 import Picker from 'react-native-picker';
-import styles from "./styles";
+
+import AllParkingChart from './allParkingChart';
+import WeeklyChart from './weeklyChart';
+import DailyChart from './dailyChart';
+import MonthlyChart from './monthlyChart';
+
+import styles from './styles';
 
 const chartConfig = {
 	backgroundColor: '#0091EA',
@@ -28,7 +34,7 @@ const chartConfig = {
 	color: (opacity = 1) => `rgba(${255}, ${255}, ${255}, ${opacity})`
 }
 
-const parkings = ['Suối Tiên', 'Đầm Sen', 'CV Lê Thị Riêng', 'Coop Extra Linh Trung'];
+const parkings = ['All Parkings', 'Suối Tiên', 'Đầm Sen', 'CV Lê Thị Riêng', 'Coop Extra Linh Trung'];
 const types = ['Daily', 'Weekly', 'Monthly'];
 
 const date = new Date();
@@ -156,6 +162,7 @@ class Report extends Component {
 			textAlign: 'center',
 			fontSize: 16
 		}
+
 		const graphStyle = {
 			marginVertical: 8,
 			borderRadius: 16,
@@ -170,7 +177,7 @@ class Report extends Component {
 							transparent
 							onPress={() => this.props.navigation.openDrawer()}
 						>
-							<Icon name="ios-menu" />
+							<Icon style={{ color: '#0091EA' }} name='ios-menu' />
 						</Button>
 					</Left>
 					<Body>
@@ -179,17 +186,12 @@ class Report extends Component {
 					<Right />
 				</Header>
 
-				<View style={{ margin: 5, flex: 1, maxHeight: height * 0.25 }}>
-					<View style={{
-						flexDirection: 'row',
-						alignItems: 'center',
-						justifyContent: 'space-between',
-					}}>
+				<View style={{ ...styles.containerFilter, maxHeight: height * 0.25 }}>
+					<View style={styles.rowFilter}>
 						<Button iconRight
 							style={{
 								backgroundColor: chartConfig.backgroundColor,
 								width: width * 0.66,
-								marginRight: 0
 							}}
 							onPress={this._showParkingPicker.bind(this)}>
 							<Text>{this.state.selectedParking}</Text>
@@ -208,9 +210,7 @@ class Report extends Component {
 					</View>
 					<View style={{
 						marginTop: 5,
-						flexDirection: 'row',
-						alignItems: 'center',
-						justifyContent: 'space-between',
+						...styles.rowFilter
 					}}>
 						<Button iconRight
 							style={{
@@ -232,21 +232,13 @@ class Report extends Component {
 							<Icon name='arrow-down' />
 						</Button>
 					</View>
-					<View style={{
-						marginTop: 5,
-						flexDirection: 'row',
-						alignItems: 'center',
-						justifyContent: 'center',
-					}}>
+					<View style={styles.buttonContainer}>
 						<Button iconRight
 							style={{
 								backgroundColor: chartConfig.backgroundColor,
 								width: width * 0.5,
-								marginRight: 2,
-								alignItems: 'center',
-								justifyContent: 'center',
-							}}
-							onPress={this._showParkingPicker.bind(this)}>
+								...styles.buttonViewChart,
+							}}>
 							<Text style={{ fontWeight: 'bold' }}>VIEW CHART</Text>
 							<Icon name='chart-bar' type='MaterialCommunityIcons' />
 						</Button>
@@ -256,47 +248,48 @@ class Report extends Component {
 				<Content padder>
 					<ScrollView
 						showsVerticalScrollIndicator={false}
-						showsHorizontalScrollIndicator={false}
-					>
-						<LineChart
-							data={data}
-							width={widthChart}
-							height={heightChart}
-							chartConfig={chartConfig}
-							bezier
-							style={graphStyle}
-						/>
-						<Text style={labelStyle}>Bezier Line Chart</Text>
-
-						<BarChart
-							width={widthChart}
-							height={heightChart}
-							data={data}
-							chartConfig={chartConfig}
-							style={graphStyle}
-						/>
-						<Text style={labelStyle}>Bar Graph</Text>
-
-						<PieChart
+						showsHorizontalScrollIndicator={false}>
+						
+						<AllParkingChart
 							data={pieChartData}
 							height={heightChart}
 							width={widthChart}
 							chartConfig={chartConfig}
-							accessor="population"
 							style={graphStyle}
-							backgroundColor='#546E7A'
-							paddingLeft="15"
-						/>
-						<Text style={labelStyle}>Pie Chart</Text>
+							labelStyle={labelStyle}
+							label={'All Parkings Daily Chart'}>
+						</AllParkingChart>
 
-						<LineChart
+						<DailyChart
 							data={data}
 							width={widthChart}
 							height={heightChart}
 							chartConfig={chartConfig}
 							style={graphStyle}
-						/>
-						<Text style={labelStyle}>Line Chart</Text>
+							labelStyle={labelStyle}
+							label={'Daily Chart'}>
+						</DailyChart>
+
+						<WeeklyChart
+							data={data}
+							width={widthChart}
+							height={heightChart}
+							chartConfig={chartConfig}
+							style={graphStyle}
+							labelStyle={labelStyle}
+							label={'Weekly Chart'}>
+						</WeeklyChart>
+
+						<MonthlyChart
+							data={data}
+							width={widthChart}
+							height={heightChart}
+							chartConfig={chartConfig}
+							style={graphStyle}
+							labelStyle={labelStyle}
+							label={'Monthly Chart'}>
+						</MonthlyChart>
+
 					</ScrollView>
 				</Content>
 			</Container>
