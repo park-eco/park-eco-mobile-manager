@@ -19,6 +19,7 @@ import AllParkingChart from './allParkingChart';
 import WeeklyChart from './weeklyChart';
 import DailyChart from './dailyChart';
 import MonthlyChart from './monthlyChart';
+import TableDetail from './tableDetail';
 
 import styles from './styles';
 
@@ -45,6 +46,7 @@ class Report extends Component {
 			selectedType: types[0],
 			selectedDateFrom: `${currentYear}-${currentMonth}-${currentDate - 1}`,
 			selectedDateTo: `${currentYear}-${currentMonth}-${currentDate}`,
+			chartType: 0
 		}
 
 		this._showDatePicker = this._showDatePicker.bind(this);
@@ -56,7 +58,7 @@ class Report extends Component {
 			pickerData: parkings,
 			selectedValue: [0],
 			onPickerConfirm: data => {
-				this.setState({ selectedParking: data });
+				this.setState({ selectedParking: data[0] });
 			},
 			onPickerCancel: data => {
 			},
@@ -73,7 +75,7 @@ class Report extends Component {
 			pickerData: types,
 			selectedValue: [0],
 			onPickerConfirm: data => {
-				this.setState({ selectedType: data });
+				this.setState({ selectedType: data[0] });
 			},
 			onPickerCancel: data => {
 			},
@@ -142,6 +144,27 @@ class Report extends Component {
 			}
 		});
 		Picker.show();
+	}
+
+	_viewChart() {
+		if (this.state.selectedParking == parkings[0]) {
+			this.setState({ chartType: 0 });
+		} else {
+			// Daily type chart for 1 parking
+			if (this.state.selectedType == types[0]) {
+				this.setState({ chartType: 1 });
+			}
+
+			// Weekly type chart for 1 parking
+			if (this.state.selectedType == types[1]) {
+				this.setState({ chartType: 2 });
+			}
+
+			// Monthly type chart for 1 parking
+			if (this.state.selectedType == types[2]) {
+				this.setState({ chartType: 3 });
+			}
+		}
 	}
 
 
@@ -214,7 +237,7 @@ class Report extends Component {
 							}}
 							onPress={() => this._showDatePicker('From')}>
 							<Text>{this.state.selectedDateFrom}</Text>
-							<Icon name='arrow-down' />
+							<Icon name='calendar' type='EvilIcons' />
 						</Button>
 
 						<Button iconRight
@@ -224,11 +247,12 @@ class Report extends Component {
 							}}
 							onPress={() => this._showDatePicker('To')}>
 							<Text>{this.state.selectedDateTo}</Text>
-							<Icon name='arrow-down' />
+							<Icon name='calendar' type='EvilIcons' />
 						</Button>
 					</View>
 					<View style={styles.buttonContainer}>
 						<Button iconRight
+							onPress={this._viewChart.bind(this)}
 							style={{
 								backgroundColor: chartConfig.backgroundColor,
 								width: width * 0.5,
@@ -245,46 +269,59 @@ class Report extends Component {
 						showsVerticalScrollIndicator={false}
 						showsHorizontalScrollIndicator={false}>
 
-						<AllParkingChart
-							data={pieChartData}
-							height={heightChart}
-							width={widthChart}
-							chartConfig={chartConfig}
-							style={graphStyle}
-							labelStyle={labelStyle}
-							labelChart={'All Parkings Daily Chart'}
-							labelTable={'All Parkings Detailed Statistics Table'}>
-						</AllParkingChart>
+						{this.state.chartType === 0 &&
+							<AllParkingChart
+								data={pieChartData}
+								height={heightChart}
+								width={widthChart}
+								chartConfig={chartConfig}
+								style={graphStyle}
+								labelStyle={labelStyle}
+								labelChart={'All Parkings Daily Chart'}
+								labelTable={'All Parkings Detailed Statistics Table'}>
+							</AllParkingChart>
+						}
 
-						<DailyChart
-							data={data}
-							width={widthChart}
-							height={heightChart}
-							chartConfig={chartConfig}
-							style={graphStyle}
-							labelStyle={labelStyle}
-							label={'Daily Chart'}>
-						</DailyChart>
+						{this.state.chartType === 1 &&
+							<DailyChart
+								data={data}
+								width={widthChart}
+								height={heightChart}
+								chartConfig={chartConfig}
+								style={graphStyle}
+								labelStyle={labelStyle}
+								label={'Daily Chart'}>
+							</DailyChart>
+						}
 
-						<WeeklyChart
-							data={data}
-							width={widthChart}
-							height={heightChart}
-							chartConfig={chartConfig}
-							style={graphStyle}
-							labelStyle={labelStyle}
-							label={'Weekly Chart'}>
-						</WeeklyChart>
+						{this.state.chartType === 2 &&
+							<WeeklyChart
+								data={data}
+								width={widthChart}
+								height={heightChart}
+								chartConfig={chartConfig}
+								style={graphStyle}
+								labelStyle={labelStyle}
+								label={'Weekly Chart'}>
+							</WeeklyChart>
+						}
 
-						<MonthlyChart
-							data={data}
-							width={widthChart}
-							height={heightChart}
-							chartConfig={chartConfig}
-							style={graphStyle}
+						{this.state.chartType === 3 &&
+							<MonthlyChart
+								data={data}
+								width={widthChart}
+								height={heightChart}
+								chartConfig={chartConfig}
+								style={graphStyle}
+								labelStyle={labelStyle}
+								label={'Monthly Chart'}>
+							</MonthlyChart>
+						}
+
+						<TableDetail
 							labelStyle={labelStyle}
-							label={'Monthly Chart'}>
-						</MonthlyChart>
+							labelTable={'Detailed Statistics Table'}>
+						</TableDetail>
 
 					</ScrollView>
 				</Content>
