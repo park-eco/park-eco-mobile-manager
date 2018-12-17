@@ -97,7 +97,7 @@ class LiveTracking extends Component {
     return (
       <Container style={styles.container}>
 
-        <Searchbar data={this.state.data}
+        <Searchbar
           sortByStatusIncrease={this.sortByStatusIncrease}
           sortByStatusDecrease={this.sortByStatusDecrease} />
 

@@ -4,6 +4,7 @@ import {
   View,
   Dimensions,
   Animated,
+  Text
 } from 'react-native';
 
 import {
@@ -379,7 +380,9 @@ class MapViewMode extends Component {
                       { scale },
                     ],
                   }]}
-                />
+                >
+                  <Text>{i}-{marker.amount}</Text>
+                </Animated.View>
               );
             })}
           </View>
