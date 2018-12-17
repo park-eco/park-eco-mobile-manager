@@ -33,8 +33,8 @@ class ItemListView extends Component {
 
 	render() {
 		return (
-			<Card>
-				<CardItem>
+			<Card style={this.props.style}>
+				<CardItem style={this.props.style}>
 					<Content>
 						<ListItem icon>
 							<Left>
@@ -64,7 +64,7 @@ class ItemListView extends Component {
 						</ListItem>
 					</Content>
 				</CardItem>
-				<CardItem footer>
+				<CardItem style={this.props.style} footer>
 					<Text>{this.props.nameTheParking}</Text>
 				</CardItem>
 			</Card>

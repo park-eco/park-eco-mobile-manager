@@ -4,7 +4,6 @@ import {
   View,
   Dimensions,
   Animated,
-  Text
 } from 'react-native';
 
 import {
@@ -15,6 +14,7 @@ import {
 } from 'react-native-maps';
 import PanController from './panController';
 import PriceMarker from './animatedPriceMarker';
+import ItemListView from "./itemListView";
 
 const screen = Dimensions.get('window');
 
@@ -154,32 +154,7 @@ class MapViewMode extends Component {
       extrapolate: 'clamp',
     });
 
-    const markers = [
-      {
-        id: 0,
-        amount: 90,
-        coordinate: {
-          latitude: 10.777956,
-          longitude: 106.694605,
-        },
-      },
-      {
-        id: 1,
-        amount: 49,
-        coordinate: {
-          latitude: 10.787401,
-          longitude: 106.693692,
-        },
-      },
-      {
-        id: 2,
-        amount: 25,
-        coordinate: {
-          latitude: 10.789098,
-          longitude: 106.704493,
-        },
-      },
-    ];
+    const markers = this.props.data;
 
     const animations = markers.map((m, i) =>
       getMarkerState(panX, panY, scrollY, i));
@@ -353,7 +328,7 @@ class MapViewMode extends Component {
                         { scale: markerScale },
                       ],
                     }}
-                    amount={marker.amount}
+                    amount={marker.status}
                     selected={selected}
                   />
                 </Marker>
@@ -381,7 +356,14 @@ class MapViewMode extends Component {
                     ],
                   }]}
                 >
-                  <Text>{i}-{marker.amount}</Text>
+                  <ItemListView 
+                    style={{ backgroundColor: 'transparent' }}
+                    key={marker.id}
+                    nameTheParking={marker.nameTheParking}
+                    status={marker.status}
+                    nameWorkingEmployee={marker.nameWorkingEmployee}
+                    phoneNumberWorkingEmployee={marker.phoneNumberWorkingEmployee}>
+                  </ItemListView>
                 </Animated.View>
               );
             })}
