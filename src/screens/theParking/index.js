@@ -11,6 +11,7 @@ import {
 	Right,
 	Body
 } from "native-base";
+import { getAllParkingLots } from './../../actions/parkingLotAction';
 
 import styles from "./styles";
 
@@ -27,7 +28,7 @@ class TheParking extends Component {
 		getAllParkingLots().then((response) => {
 			console.log(response);
 			this.setState({
-				firstParkingLot: response
+				parkingLotInformation: response
 			});
 		});
 	}
