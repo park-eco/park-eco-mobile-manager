@@ -48,7 +48,7 @@ class Searchbar extends Component {
 
     render() {
         return (
-            <View style={{ marginTop: 20 }}>
+            <View style={{ marginTop: 0 }}>
                 <Toolbar
                     leftElement="menu"
                     centerElement="Live Tracking"
@@ -67,7 +67,7 @@ class Searchbar extends Component {
                     }}
 
                     style={{
-                        titleText: { textAlign: this.state.textAlign },
+                        titleText: { textAlign: this.state.textAlign }
                     }}
                 />
             </View>

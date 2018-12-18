@@ -26,7 +26,11 @@ class LiveTracking extends Component {
         status: 20,
         idWorkingEmployee: "333",
         nameWorkingEmployee: "Lee Khai",
-        phoneNumberWorkingEmployee: "0328372201"
+        phoneNumberWorkingEmployee: "0328372201",
+        coordinate: {
+          latitude: 10.777956,
+          longitude: 106.694605,
+        },
       },
       {
         id: "2",
@@ -34,7 +38,11 @@ class LiveTracking extends Component {
         status: 95,
         idWorkingEmployee: "334",
         nameWorkingEmployee: "Vo Ngoc",
-        phoneNumberWorkingEmployee: "0328372202"
+        phoneNumberWorkingEmployee: "0328372202",
+        coordinate: {
+          latitude: 10.787401,
+          longitude: 106.693692,
+        },
       },
       {
         id: "3",
@@ -42,7 +50,11 @@ class LiveTracking extends Component {
         status: 20,
         idWorkingEmployee: "335",
         nameWorkingEmployee: "Huynh Kim",
-        phoneNumberWorkingEmployee: "0328372203"
+        phoneNumberWorkingEmployee: "0328372203",
+        coordinate: {
+          latitude: 10.789098,
+          longitude: 106.704493,
+        },
       },
       {
         id: "4",
@@ -50,7 +62,11 @@ class LiveTracking extends Component {
         status: 70,
         idWorkingEmployee: "336",
         nameWorkingEmployee: "Lee Tuan",
-        phoneNumberWorkingEmployee: "0328372204"
+        phoneNumberWorkingEmployee: "0328372204",
+        coordinate: {
+          latitude: 10.789098,
+          longitude: 106.714493,
+        },
       }]
     };
   }
@@ -97,7 +113,7 @@ class LiveTracking extends Component {
     return (
       <Container style={styles.container}>
 
-        <Searchbar data={this.state.data}
+        <Searchbar
           sortByStatusIncrease={this.sortByStatusIncrease}
           sortByStatusDecrease={this.sortByStatusDecrease} />
 
@@ -127,7 +143,7 @@ class LiveTracking extends Component {
                 longitudeDelta: 0.0421,
               }}
             />
-            <MapViewMode></MapViewMode>
+            <MapViewMode data={this.state.data}></MapViewMode>
           </Content>
         }
 
