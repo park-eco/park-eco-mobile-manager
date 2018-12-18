@@ -7,13 +7,14 @@
     "test": "jest"
   },
   "dependencies": {
-    "native-base": "^2.8.0",
+    "native-base": "^2.8.2",
     "react": "16.5.0",
     "react-native": "0.57.1",
     "react-native-dialog": "^5.4.0",
     "react-native-material-bottom-navigation": "^1.0.1",
     "react-native-micro-animated-button": "^0.0.27",
     "react-native-restart": "0.0.7",
+    "react-native-table-component": "^1.1.8",
     "react-navigation": "^2.17.0"
   },
   "devDependencies": {
