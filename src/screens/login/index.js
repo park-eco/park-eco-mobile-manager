@@ -20,20 +20,15 @@ class Login extends Component {
 	}
 
 	onPress = () => {
-		if (this.username.state.value == "1" && this.password.state.value == "1") {
-			this.loginButton.btn.success();
-			this.loginButton.state.username = this.username.state.value;
-		} else {
-			logIn(this.username.state.value, this.password.state.value).then((response) => {
-				if (response == 200) {
-					this.loginButton.btn.success();
-					this.loginButton.state.username = this.username.state.value;
-				} else {
-					this.loginButton.onError();
-					this.clearAllInputs();
-				}
-			});
-		}
+		logIn(this.username.state.value, this.password.state.value).then((response) => {
+			if (response == 200) {
+				this.loginButton.btn.success();
+				this.loginButton.state.username = this.username.state.value;
+			} else {
+				this.loginButton.btn.error();
+				this.clearAllInputs();
+			}
+		});
 	}
 
 	clearAllInputs = () => {

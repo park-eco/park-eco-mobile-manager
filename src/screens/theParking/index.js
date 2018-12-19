@@ -11,7 +11,8 @@ import {
 	Right,
 	Body
 } from "native-base";
-import { getAllParkingLots } from './../../actions/parkingLotAction';
+import { getAllParkingLots } from "./../../actions/parkingLotAction";
+import Searchbar from "./../searchbar/searchbar"
 
 import styles from "./styles";
 
@@ -40,20 +41,12 @@ class TheParking extends Component {
 	render() {
 		return (
 			<Container style={styles.container}>
-				<Header>
-					<Left>
-						<Button
-							transparent
-							onPress={() => this.props.navigation.openDrawer()}
-						>
-							<Icon name="ios-menu" />
-						</Button>
-					</Left>
-					<Body>
-						<Title>The Parking</Title>
-					</Body>
-					<Right />
-				</Header>
+			<Searchbar
+					sortIncrease={this.sortByNameAZ}
+					sortDecrease={this.sortByNameZA}
+					iconIncrease="sort-by-alpha"
+					iconDecrease="sort-by-alpha"
+					title="Parking Management" />
 
 				<Content padder>
 					<Text>Content goes here</Text>
