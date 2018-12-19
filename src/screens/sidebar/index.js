@@ -62,6 +62,10 @@ class SideBar extends Component {
     };
   }
 
+  _logout = () => {
+    this.props.navigation.navigate('Login');
+  }
+
   render() {
     return (
       <Container>
@@ -124,9 +128,10 @@ class SideBar extends Component {
             <Right>
               <Icon
                 active
-                name='ios-settings'
-                type='Ionicons'
+                name='logout'
+                type='MaterialCommunityIcons'
                 style={{ color: "#777", fontSize: 26, width: 30 }}
+                onPress={this._logout}
               />
             </Right>
           </ListItem>
