@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StatusBar } from 'react-native';
 
 // withNavigation is a function to provide the navigation prop automatically (through React context, if you're curious)
-import { withNavigation } from 'react-navigation'; 
+import { withNavigation, StackActions, NavigationActions } from 'react-navigation';
 
 import Btn from 'react-native-micro-animated-button';
 
@@ -11,18 +11,26 @@ StatusBar.setHidden(true, 'fade');
 class LoginButton extends Component {
 	constructor() {
 		super();
+		this.state = {
+			username: ''
+		}
 	}
 
 	componentDidMount() {
 		this.props.onRef(this)
 	}
-	
+
 	componentWillUnmount() {
 		this.props.onRef(undefined)
 	}
 
 	onSuccess = () => {
-		this.props.navigation.navigate("LiveTracking");
+		// navigate and remove from stack
+		const resetAction = StackActions.reset({
+			index: 0,
+			actions: [NavigationActions.navigate({ routeName: 'Drawer', params: { username: this.state.username } })],
+		});
+		this.props.navigation.dispatch(resetAction);
 	}
 
 	onError = () => {
@@ -40,7 +48,7 @@ class LoginButton extends Component {
 				onPress={this.props.onPress}
 				onSuccess={this.onSuccess}
 				onError={this.onError}
-				ref={ (ref) => this.btn = ref }
+				ref={(ref) => this.btn = ref}
 				shakeOnError
 			/>
 		);

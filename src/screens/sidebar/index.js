@@ -11,6 +11,8 @@ import {
   Right,
   Badge
 } from "native-base";
+import { COLOR } from 'react-native-material-ui';
+import { getLoggedinUser } from './../../actions/authenticationAction'
 import styles from "./style";
 
 const drawerCover = require("../../../assets/background-login1.jpg");
@@ -19,31 +21,35 @@ const datas = [
   {
     name: "LiveTracking",
     route: "LiveTracking",
-    icon: "phone-portrait",
+    icon: "map-marker",
+    type: "FontAwesome",
     bg: "#C5F442"
   },
   {
     name: "HumanResource",
     route: "HumanResource",
-    icon: "phone-portrait",
+    icon: "human-greeting",
+    type: "MaterialCommunityIcons",
     bg: "#C5F442"
   },
   {
     name: "TheParking",
     route: "TheParking",
-    icon: "phone-portrait",
+    icon: "parking",
+    type: "MaterialCommunityIcons",
     bg: "#C5F442"
   },
-  {
-    name: "Revenue",
-    route: "Revenue",
-    icon: "phone-portrait",
-    bg: "#C5F442"
-  },
+  // {
+  //   name: "Revenue",
+  //   route: "Revenue",
+  //   icon: "phone-portrait",
+  //   bg: "#C5F442"
+  // },
   {
     name: "Report",
     route: "Report",
-    icon: "phone-portrait",
+    icon: "chart-areaspline",
+    type: "MaterialCommunityIcons",
     bg: "#C5F442"
   },
 ];
@@ -52,9 +58,20 @@ class SideBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      shadowOffsetWidth: 1,
-      shadowRadius: 4
+      user: {}
     };
+  }
+
+  _logout = () => {
+    this.props.navigation.navigate('Login');
+  }
+
+  componentDidMount() {
+    const username = this.props.navigation.getParam('username', 'null');
+    
+    getLoggedinUser(username).then((response) => {
+      this.setState({ user: response[0] });
+    });
   }
 
   render() {
@@ -79,6 +96,7 @@ class SideBar extends Component {
                   <Icon
                     active
                     name={data.icon}
+                    type={data.type}
                     style={{ color: "#777", fontSize: 26, width: 30 }}
                   />
                   <Text style={styles.text}>
@@ -102,6 +120,30 @@ class SideBar extends Component {
                   </Right>}
               </ListItem>}
           />
+
+          <ListItem style={{ marginTop: 150 }}>
+            <Left>
+              <Icon
+                active
+                name='user-circle-o'
+                type='FontAwesome'
+                style={{ color: "#777", fontSize: 26, width: 30 }}
+              />
+              <Text style={styles.text}>
+                {this.state.user.name}
+              </Text>
+            </Left>
+            <Right>
+              <Icon
+                active
+                name='logout'
+                type='MaterialCommunityIcons'
+                style={{ color: "#777", fontSize: 26, width: 30 }}
+                onPress={this._logout}
+              />
+            </Right>
+          </ListItem>
+          <Text style={{ marginTop: 7, fontSize: 11, color: COLOR.grey600, textAlign: "center" }}>© 2018 ParkEco, Inc.</Text>
         </Content>
       </Container>
     );

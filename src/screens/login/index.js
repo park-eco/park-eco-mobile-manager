@@ -9,6 +9,7 @@ import KInput from "./input";
 import Banner from "./banner";
 import ServerInput from "./serverInput";
 import ForgotPassword from "./forgotPassword";
+import { logIn } from './../../actions/authenticationAction'
 
 const background = require("../../../assets/background-login1.jpg");
 const logo = require("../../../assets/icon-Parking-Systems.jpg");
@@ -21,9 +22,17 @@ class Login extends Component {
 	onPress = () => {
 		if (this.username.state.value == "1" && this.password.state.value == "1") {
 			this.loginButton.btn.success();
+			this.loginButton.state.username = this.username.state.value;
 		} else {
-			this.loginButton.btn.error();
-			this.clearAllInputs();
+			logIn(this.username.state.value, this.password.state.value).then((response) => {
+				if (response == 200) {
+					this.loginButton.btn.success();
+					this.loginButton.state.username = this.username.state.value;
+				} else {
+					this.loginButton.onError();
+					this.clearAllInputs();
+				}
+			});
 		}
 	}
 
@@ -35,25 +44,25 @@ class Login extends Component {
 	render() {
 		return (
 			<Container style={styles.container}>
-				<Background source={background}/>
-				<Banner source={logo} style={{ marginTop: 30 }}/>
-				<ServerInput style={{ marginTop: 15, marginBottom:30, justifyContent: 'center', alignItems: 'center' }}/>
+				<Background source={background} />
+				<Banner source={logo} style={{ marginTop: 30 }} />
+				<ServerInput style={{ marginTop: 15, marginBottom: 30, justifyContent: 'center', alignItems: 'center' }} />
 
-				<View  style={{ alignItems: "center" }}>
+				<View style={{ alignItems: "center" }}>
 					<Form>
-						<KInput ref={ (ref) => this.username = ref }
-								placeholder="Username" icon="user"
-									/>
-						<KInput ref={ (ref) => this.password = ref }
-								placeholder="Password" icon="lock-open" secureTextEntry/>
+						<KInput ref={(ref) => this.username = ref}
+							placeholder="Username" icon="user"
+						/>
+						<KInput ref={(ref) => this.password = ref}
+							placeholder="Password" icon="lock-open" secureTextEntry />
 					</Form>
 
 					<LoginButton
-						onRef={ (ref) => this.loginButton = ref }
+						onRef={(ref) => this.loginButton = ref}
 						onPress={this.onPress}
-					/>	
+					/>
 				</View>
-				<ForgotPassword style={{ marginTop: 90 }}/>
+				<ForgotPassword style={{ marginTop: 90 }} />
 			</Container>
 		);
 	}
