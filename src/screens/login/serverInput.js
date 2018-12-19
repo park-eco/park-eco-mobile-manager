@@ -52,6 +52,7 @@ class ServerInput extends Component {
     _storeData = async () => {
         try {
             await AsyncStorage.setItem('SERVER', this.state.server);
+            // BACKEND_ROOT_URL = this.state.server;
         } catch (error) {
             // Error saving data
             console.log(error);

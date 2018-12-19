@@ -11,6 +11,9 @@ StatusBar.setHidden(true, 'fade');
 class LoginButton extends Component {
 	constructor() {
 		super();
+		this.state = {
+			username: ''
+		}
 	}
 
 	componentDidMount() {
@@ -25,10 +28,9 @@ class LoginButton extends Component {
 		// navigate and remove from stack
 		const resetAction = StackActions.reset({
 			index: 0,
-			actions: [NavigationActions.navigate({ routeName: 'Drawer' })],
+			actions: [NavigationActions.navigate({ routeName: 'Drawer', params: { username: this.state.username } })],
 		});
 		this.props.navigation.dispatch(resetAction);
-		// this.props.navigation.navigate("LiveTracking");
 	}
 
 	onError = () => {

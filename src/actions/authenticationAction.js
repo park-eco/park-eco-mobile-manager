@@ -1,10 +1,32 @@
-import { BACKEND_ROOT_URL, PARKING_LOT_ATTENDANT_SERVICE } from './Config';
+import { BACKEND_ROOT_URL, PARKING_LOT_ATTENDANT_SERVICE, LOG_IN } from './Config';
 
-export const logIn = () => {
-  return fetch(BACKEND_ROOT_URL + PARKING_LOT_ATTENDANT_SERVICE)
+export const logIn = (username, password) => {
+  return fetch(BACKEND_ROOT_URL + PARKING_LOT_ATTENDANT_SERVICE + '/' + LOG_IN, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      username: username,
+      password: password,
+    }),
+  })
     .then((response) => response.status)
     .then((responseStatus) => {
       return responseStatus;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+// Call the API to get information of the user just loged in system
+export const getLoggedinUser = (username) => {
+  return fetch(BACKEND_ROOT_URL + PARKING_LOT_ATTENDANT_SERVICE + '?username=' + username)
+    .then((response) => response.json())
+    .then((responseJson) => {
+      return responseJson;
     })
     .catch((error) => {
       console.error(error);

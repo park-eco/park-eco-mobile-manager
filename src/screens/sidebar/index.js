@@ -12,6 +12,7 @@ import {
   Badge
 } from "native-base";
 import { COLOR } from 'react-native-material-ui';
+import { getLoggedinUser } from './../../actions/authenticationAction'
 import styles from "./style";
 
 const drawerCover = require("../../../assets/background-login1.jpg");
@@ -57,13 +58,20 @@ class SideBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      shadowOffsetWidth: 1,
-      shadowRadius: 4
+      user: {}
     };
   }
 
   _logout = () => {
     this.props.navigation.navigate('Login');
+  }
+
+  componentDidMount() {
+    const username = this.props.navigation.getParam('username', 'null');
+    
+    getLoggedinUser(username).then((response) => {
+      this.setState({ user: response[0] });
+    });
   }
 
   render() {
@@ -122,7 +130,7 @@ class SideBar extends Component {
                 style={{ color: "#777", fontSize: 26, width: 30 }}
               />
               <Text style={styles.text}>
-                ADMIN
+                {this.state.user.name}
               </Text>
             </Left>
             <Right>
