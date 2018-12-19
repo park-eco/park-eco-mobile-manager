@@ -19,6 +19,8 @@ import styles from './styles';
 import { Table, Row, Rows } from 'react-native-table-component';
 import ItemListAcc from './ItemListAcc';
 
+
+
 class ListAccount extends Component {
 	constructor() {
 		super();
@@ -38,7 +40,7 @@ class ListAccount extends Component {
 				Name: "Tran Thanh Tuan",
 				Phone: "0982753624"
 			}
-		]
+			]
 		}
 		// this.state = {
 		// 	tableHead: ['Id', 'Name', 'Phone', 'Email'],
@@ -72,14 +74,19 @@ class ListAccount extends Component {
 
 				<Content>
 					<Container>
-						{this.state.data.map( data => {
-							return (
-								<ItemListAcc Id={data.Id}
-											Name={data.Name}
-											Phone={data.Phone}>
-								</ItemListAcc>
-							)
-						})}
+						<Content>
+							{this.state.data.map(data => {
+								return (
+									<ItemListAcc Id={data.Id}
+										Name={data.Name}
+										Phone={data.Phone}
+										Navigate = {navigate}
+							
+									>
+									</ItemListAcc>
+								)
+							})}
+						</Content>
 					</Container>
 					{/* <Container style={styles.container}>
 						<Table borderStyle={{ borderWidth: 2, borderColor: '#6495ed' }}>
@@ -95,7 +102,7 @@ class ListAccount extends Component {
 							rounded
 							onPress={() => navigate('CreateAcc')}
 						>
-							<Text style={{fontSize: 20, color: '#fff'}}>+</Text>
+							<Text style={{ fontSize: 20, color: '#fff' }}>+</Text>
 						</Button>
 					</FooterTab>
 				</Footer>

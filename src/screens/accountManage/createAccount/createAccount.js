@@ -8,7 +8,9 @@ import {
     Icon,
     Form,
     Button,
-    Text
+    Text,
+    Footer,
+    FooterTab
 } from 'native-base';
 
 import styles from './styles';
@@ -16,20 +18,22 @@ import styles from './styles';
 class CreateAccount extends Component {
     constructor(props) {
         super(props);
-        //const { name, phone, email, address } = props.account;
         this.state = {
             txtName: '',
             nameValidate: true,
+            txtUseName: '',
+            useNameValidate: true,
+            txtEmail: '',
+            emailValidate: true,
             txtPhone: '',
             phoneValidate: true,
-            txtEmail: '',
             txtAddress: '',
-            error: '',
+            addressValidate: true,
         };
     }
 
     async onCreatePressed() {
-        //Navigator to ViewDetail
+        this.props.navigation('ViewDetail');
     }
 
     validate(text, type) {
@@ -67,27 +71,26 @@ class CreateAccount extends Component {
                 <Header />
                 <Content padder>
                     <Form>
-                        <Item>
+                        <Item >
                             <Icon active name="person" style={{ color: '#387ef5' }} />
                             <Input
-                                style={[!this.state.nameValidate ? styles.error : null]}
                                 placeholder="Enter name"
                                 value={this.state.txtName}
                                 onChangeText={text => {
                                     this.validate(text, 'name');
                                     this.setState({ ...this.state, txtName: text });
                                 }}
-                            />
+                            />                            
                         </Item>
                         <Item>
-                            <Icon active name="logo-whatsapp" style={{ color: '#387ef5' }} />
+                            <Icon active name="eye" style={{ color: '#387ef5' }} />
                             <Input
-                                style={[!this.state.phoneValidate ? styles.error : null]}
-                                placeholder="Enter phone number"
-                                value={this.state.txtPhone}
+                                style={[!this.state.nameValidate ? styles.error : null]}
+                                placeholder="Enter usename"
+                                value={this.state.txtUseName}
                                 onChangeText={text => {
-                                    this.validate(text, 'phone');
-                                    this.setState({ ...this.state, txtPhone: text })
+                                    this.validate(text, 'usename');
+                                    this.setState({ ...this.state, txtUseName: text });
                                 }}
                             />
                         </Item>
@@ -101,6 +104,18 @@ class CreateAccount extends Component {
                             />
                         </Item>
                         <Item>
+                            <Icon active name="call" style={{ color: '#387ef5' }} />
+                            <Input
+                                style={[!this.state.phoneValidate ? styles.error : null]}
+                                placeholder="Enter phone number"
+                                value={this.state.txtPhone}
+                                onChangeText={text => {
+                                    this.validate(text, 'phone');
+                                    this.setState({ ...this.state, txtPhone: text })
+                                }}
+                            />
+                        </Item>
+                        <Item>
                             <Icon active name="home" style={{ color: '#387ef5' }} />
                             <Input
                                 placeholder="Enter address"
@@ -110,18 +125,24 @@ class CreateAccount extends Component {
                             />
                         </Item>
                     </Form>
-                    <Button
-                        block
-                        style={{ margin: 15, marginTop: 50 }}
-                        onPress={this.onCreatePressed.bind(this)}
-                    >
-                        <Text>Create</Text>
-                    </Button>
 
-                    <Text style={{ coler: 'red', paddingTop: 10 }}>
+
+                    <Text style={{ color: 'red', paddingTop: 10 }}>
                         {this.state.error}
                     </Text>
                 </Content>
+
+                <Footer>
+                    <FooterTab>
+                        <Button
+                            rounded
+                            // onPress={this.onCreatePressed.bind(this)}
+                            onPress={ () => this.props.navigation.navigate('ViewDetail')}
+                        >
+                            <Text style={{color: '#fff' }}>Create</Text>
+                        </Button>
+                    </FooterTab>
+                </Footer>
             </Container>
         );
     }
