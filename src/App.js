@@ -5,7 +5,7 @@ import { StackNavigator, DrawerNavigator } from "react-navigation";
 import SideBar from "./screens/sidebar";
 import Login from "./screens/login";
 import LiveTracking from "./screens/liveTracking";
-import HumanResource from "./screens/humanResource";
+import NavigatingAcc from "./screens/accountManage/navigatingAcc";
 import TheParking from "./screens/theParking";
 import Revenue from "./screens/revenue";
 import Report from "./screens/report";
@@ -15,7 +15,7 @@ import Report from "./screens/report";
 const Drawer = DrawerNavigator(
     {
         LiveTracking: { screen: LiveTracking },
-        HumanResource: { screen: HumanResource },
+        HumanResource: { screen: NavigatingAcc },
         TheParking: { screen: TheParking },
         Revenue: { screen: Revenue },
         Report: { screen: Report },
