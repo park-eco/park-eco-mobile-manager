@@ -7,33 +7,18 @@ import {
 	Footer,
 	FooterTab,
 } from 'native-base';
-
+import { COLOR } from 'react-native-material-ui';
 import styles from './styles';
 import ItemListAcc from './ItemListAcc';
 import Searchbar from "./../../searchbar/searchbar";
-
+import { getAllParkingLotAttendants } from "./../../../actions/parkingLotAttendant";
 
 
 class ListAccount extends Component {
 	constructor() {
 		super();
 		this.state = {
-			data: [{
-				Id: "1",
-				Name: "A",
-				Phone: "0123789320"
-			},
-			{
-				Id: "2",
-				Name: "B",
-				Phone: "0989787262"
-			},
-			{
-				Id: "3",
-				Name: "C",
-				Phone: "0982753624"
-			}
-			]
+			data: []
 		}
 	}
 
@@ -43,6 +28,12 @@ class ListAccount extends Component {
 
 	sortByNameZA = () => {
 		this.setState({ data: this.state.data.sort((a, b) => b.Name.localeCompare(a.Name)) });
+	}
+
+	componentDidMount() {
+		getAllParkingLotAttendants().then((response) => {
+			this.setState({ data: response });
+		});
 	}
 
 
@@ -56,30 +47,30 @@ class ListAccount extends Component {
 					sortDecrease={this.sortByNameZA}
 					iconIncrease="sort-by-alpha"
 					iconDecrease="sort-by-alpha"
-					title="HR" />
+					title="Human Resource" />
 
 				<Content>
 					{this.state.data.map(data => {
 						return (
-							<ItemListAcc key={data.Id}
-								Id={data.Id}
-								Name={data.Name}
-								Phone={data.Phone}
-								Navigate={navigate}
-
+							<ItemListAcc key={data.id}
+								username={data.username}
+								name={data.name}
+								email={data.email}
+								phoneNumber={data.phoneNumber}
+								navigate={navigate}
 							>
 							</ItemListAcc>
 						)
 					})}
 				</Content>
 
-				<Footer>
+				<Footer style={{ backgroundColor: COLOR.blue400 }}>
 					<FooterTab>
 						<Button
 							rounded
 							onPress={() => navigate('CreateAcc')}
 						>
-							<Text style={{ fontSize: 20, color: '#fff' }}>+</Text>
+							<Text style={{ fontSize: 20, fontWeight: 'bold', color: '#fff' }}>+</Text>
 						</Button>
 					</FooterTab>
 				</Footer>

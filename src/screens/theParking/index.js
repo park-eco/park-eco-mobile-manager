@@ -1,15 +1,8 @@
 import React, { Component } from "react";
 import {
 	Container,
-	Header,
-	Title,
 	Content,
 	Text,
-	Button,
-	Icon,
-	Left,
-	Right,
-	Body
 } from "native-base";
 import { getAllParkingLots } from "./../../actions/parkingLotAction";
 import Searchbar from "./../searchbar/searchbar"

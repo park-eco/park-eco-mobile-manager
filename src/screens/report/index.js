@@ -2,15 +2,10 @@ import React, { Component } from 'react';
 import { Dimensions, ScrollView, View } from 'react-native';
 import {
 	Container,
-	Header,
-	Title,
 	Content,
 	Text,
 	Button,
 	Icon,
-	Left,
-	Right,
-	Body,
 } from 'native-base';
 import { data, pieChartData } from './data';
 import Picker from 'react-native-picker';
