@@ -5,8 +5,8 @@ import { Toolbar } from 'react-native-material-ui';
 // withNavigation is a function to provide the navigation prop automatically (through React context, if you're curious)
 import { withNavigation } from 'react-navigation'; 
 
-const SORT_INCREASE = "trending-up";
-const SORT_DECREASE = "trending-down";
+// const this.props.iconIncrease = "trending-up";
+// const this.props.iconDecrease = "trending-down";
 
 class Searchbar extends Component {
     constructor(props) {
@@ -14,7 +14,8 @@ class Searchbar extends Component {
 
         this.state = {
             textAlign: "center",
-            sortby: SORT_DECREASE,
+            sortby: this.props.iconDecrease,
+            currentState: "increase"
         }
     }
 
@@ -24,12 +25,12 @@ class Searchbar extends Component {
 
     onRightElementPress = () => {
         setTimeout(() => {
-            if (this.state.sortby == SORT_DECREASE) {
-                this.props.sortByStatusIncrease();
-                this.setState({ sortby: SORT_INCREASE });
+            if (this.state.currentState == "decrease") {
+                this.props.sortIncrease();
+                this.setState({ sortby: this.props.iconIncrease, currentState: "increase" });
             } else {
-                this.props.sortByStatusDecrease();
-                this.setState({ sortby: SORT_DECREASE });
+                this.props.sortDecrease();
+                this.setState({ sortby: this.props.iconDecrease, currentState: "decrease" });
             }
         }, 200);
     }
@@ -51,7 +52,7 @@ class Searchbar extends Component {
             <View style={{ marginTop: 0 }}>
                 <Toolbar
                     leftElement="menu"
-                    centerElement="Live Tracking"
+                    centerElement={this.props.title}
                     rightElement={this.state.sortby}
 
                     onLeftElementPress={this.onLeftElementPress}

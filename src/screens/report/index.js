@@ -2,15 +2,10 @@ import React, { Component } from 'react';
 import { Dimensions, ScrollView, View } from 'react-native';
 import {
 	Container,
-	Header,
-	Title,
 	Content,
 	Text,
 	Button,
 	Icon,
-	Left,
-	Right,
-	Body,
 } from 'native-base';
 import { data, pieChartData } from './data';
 import Picker from 'react-native-picker';
@@ -20,6 +15,7 @@ import WeeklyChart from './weeklyChart';
 import DailyChart from './dailyChart';
 import MonthlyChart from './monthlyChart';
 import TableDetail from './tableDetail';
+import Searchbar from './../searchbar/searchbar';
 
 import styles from './styles';
 
@@ -189,20 +185,8 @@ class Report extends Component {
 
 		return (
 			<Container style={styles.container}>
-				<Header>
-					<Left>
-						<Button
-							transparent
-							onPress={() => this.props.navigation.openDrawer()}
-						>
-							<Icon style={{ color: '#0091EA' }} name='ios-menu' />
-						</Button>
-					</Left>
-					<Body>
-						<Title>Report</Title>
-					</Body>
-					<Right />
-				</Header>
+				<Searchbar
+					title="Report" />
 
 				<View style={{ ...styles.containerFilter, maxHeight: height * 0.25 }}>
 					<View style={styles.rowFilter}>

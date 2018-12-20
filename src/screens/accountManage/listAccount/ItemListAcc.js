@@ -2,18 +2,14 @@ import React, { Component } from "react";
 import {
     Card,
     CardItem,
-    Content,
-    Left,
     Body,
     Right,
     Text,
     Button,
-    Icon,
-    Image,
-    Thumbnail
+    Thumbnail,
+    View
 } from "native-base";
-import { navigatingAcc } from '../navigatingAcc';
-
+import { COLOR } from 'react-native-material-ui';
 class ItemListAcc extends Component {
     constructor(props) {
         super(props);
@@ -22,27 +18,37 @@ class ItemListAcc extends Component {
     }
 
     onPress() {
-        this.props.Navigate('ViewDetail');
+        this.props.navigate('ViewDetail');
     }
 
     render() {
         return (
-            <Card style={this.props.style}>
-                <CardItem style={this.props.style}>
-                    <Left >
-                        <Thumbnail square source={require('./avatar.png')}
-                            style={{ width: 100, height: 100 }} />
-                    </Left>
-                    <Body >
-                        <Text>{this.props.Id}</Text>
-                        <Text>{this.props.Name}</Text>
-                        <Text>{this.props.Phone}</Text>
+            <Card>
+                <CardItem style={{}}>
+                    <Body style={{ justifyContent: 'center' }}>
+                        <View style={{ flexDirection: 'row' }}>
+                            <Thumbnail square source={require('./../../../../assets/avatar.png')}
+                                style={{ width: 60, height: 60, marginRight: 10 }} />
+
+                            <View style={{ justifyContent: 'flex-end' }}>
+                                <View style={{ flexDirection: 'row' }}>
+                                    <Text style={{ color: COLOR.grey600 }}>username:</Text>
+                                    <Text> {this.props.username}</Text>
+                                </View>
+                                <View style={{ flexDirection: 'row', marginTop: 12 }}>
+                                    <Text style={{ color: COLOR.grey600 }}>fullname:</Text>
+                                    <Text> {this.props.name}</Text>
+                                </View>
+                            </View>
+
+                        </View>
+
                     </Body>
-                    <Right >
+                    <Right>
                         <Button light
                             style={{ flex: 1 }}
                             onPress={this.onPress}
-                            >
+                        >
                             <Text>></Text>
                         </Button>
                     </Right>

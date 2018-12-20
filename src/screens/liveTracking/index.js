@@ -12,7 +12,7 @@ import {
 import styles from "./styles";
 
 import ItemListView from "./itemListView";
-import Searchbar from "./searchbar";
+import Searchbar from "./../searchbar/searchbar";
 import MapViewMode from "./mapViewMode";
 
 class LiveTracking extends Component {
@@ -114,8 +114,11 @@ class LiveTracking extends Component {
       <Container style={styles.container}>
 
         <Searchbar
-          sortByStatusIncrease={this.sortByStatusIncrease}
-          sortByStatusDecrease={this.sortByStatusDecrease} />
+          sortIncrease={this.sortByStatusIncrease}
+          sortDecrease={this.sortByStatusDecrease}
+          iconIncrease="trending-up"
+          iconDecrease="trending-down"
+          title="Live Tracking" />
 
 
         {this.state.activeTab == "listViewMode" &&

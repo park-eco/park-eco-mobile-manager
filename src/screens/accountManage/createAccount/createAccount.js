@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
     Container,
-    Header,
     Content,
     Item,
     Input,
@@ -10,9 +9,12 @@ import {
     Button,
     Text,
     Footer,
-    FooterTab
+    FooterTab,
+    Thumbnail,
+    View
 } from 'native-base';
-
+import Searchbar from './../../searchbar/searchbar';
+import { COLOR } from 'react-native-material-ui';
 import styles from './styles';
 
 class CreateAccount extends Component {
@@ -32,70 +34,52 @@ class CreateAccount extends Component {
         };
     }
 
-    async onCreatePressed() {
-        this.props.navigation('ViewDetail');
-    }
-
-    validate(text, type) {
-        alph = /^[a-zA-Z]+$/
-        num = /^[0-9]+$/
-        if (type == 'name') {
-            if (alph.test(text)) {
-                this.setState({
-                    nameValidate: true,
-                })
-            }
-            else {
-                this.setState({
-                    nameValidate: false,
-                })
-            }
-        }
-        else if (type == 'phone') {
-            if (num.test(text)) {
-                this.setState({
-                    phoneValidate: true,
-                })
-            }
-            else {
-                this.setState({
-                    phoneValidate: false,
-                })
-            }
-        }
+    onCreate = () => {
+        console.log(this.state);
     }
 
     render() {
         return (
             <Container style={styles.container}>
-                <Header />
+                <Searchbar
+                    sortIncrease={this.sortByNameAZ}
+                    sortDecrease={this.sortByNameZA}
+                    title="Create User" />
+
                 <Content padder>
+                    <View style={{
+                        flex: 1,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        marginBottom: 20
+                    }}>
+                        <Thumbnail square source={require('./../../../../assets/avatar.png')}
+                            style={{ width: 150, height: 150 }} />
+                    </View>
+
                     <Form>
-                        <Item >
-                            <Icon active name="person" style={{ color: '#387ef5' }} />
+                        <Item>
+                            <Icon active name="person" style={{ fontSize: 30, color: '#387ef5' }} />
                             <Input
                                 placeholder="Enter name"
                                 value={this.state.txtName}
                                 onChangeText={text => {
-                                    this.validate(text, 'name');
                                     this.setState({ ...this.state, txtName: text });
                                 }}
-                            />                            
+                            />
                         </Item>
                         <Item>
-                            <Icon active name="eye" style={{ color: '#387ef5' }} />
+                            <Icon active name="eye" style={{ fontSize: 30, color: '#387ef5' }} />
                             <Input
-                                style={[!this.state.nameValidate ? styles.error : null]}
                                 placeholder="Enter usename"
                                 value={this.state.txtUseName}
                                 onChangeText={text => {
-                                    this.validate(text, 'usename');
                                     this.setState({ ...this.state, txtUseName: text });
                                 }}
                             />
                         </Item>
                         <Item>
-                            <Icon active name="mail" style={{ color: '#387ef5' }} />
+                            <Icon active name="mail" style={{ fontSize: 30, color: '#387ef5' }} />
                             <Input
                                 placeholder="Enter email"
                                 value={this.state.txtEmail}
@@ -104,19 +88,17 @@ class CreateAccount extends Component {
                             />
                         </Item>
                         <Item>
-                            <Icon active name="call" style={{ color: '#387ef5' }} />
+                            <Icon active name="call" style={{ fontSize: 30, color: '#387ef5' }} />
                             <Input
-                                style={[!this.state.phoneValidate ? styles.error : null]}
                                 placeholder="Enter phone number"
                                 value={this.state.txtPhone}
                                 onChangeText={text => {
-                                    this.validate(text, 'phone');
                                     this.setState({ ...this.state, txtPhone: text })
                                 }}
                             />
                         </Item>
                         <Item>
-                            <Icon active name="home" style={{ color: '#387ef5' }} />
+                            <Icon active name="home" style={{ fontSize: 30, color: '#387ef5' }} />
                             <Input
                                 placeholder="Enter address"
                                 value={this.state.txtAddress}
@@ -132,14 +114,13 @@ class CreateAccount extends Component {
                     </Text>
                 </Content>
 
-                <Footer>
+                <Footer style={{ backgroundColor: COLOR.blue400 }}>
                     <FooterTab>
                         <Button
                             rounded
-                            // onPress={this.onCreatePressed.bind(this)}
-                            onPress={ () => this.props.navigation.navigate('ViewDetail')}
+                            onPress={this.onCreate}
                         >
-                            <Text style={{color: '#fff' }}>Create</Text>
+                            <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#fff' }}>submit</Text>
                         </Button>
                     </FooterTab>
                 </Footer>
