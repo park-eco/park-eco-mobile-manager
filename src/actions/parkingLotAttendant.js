@@ -14,7 +14,7 @@ export const getAllParkingLotAttendants = () => {
 
 // Call the API to create new parking lot attendant
 export const createNewParkingLotAttendant = (name, username, email, phoneNumber) => {
-  return fetch(BACKEND_ROOT_URL + PARKING_SERVICE + '/' + REGISTER, {
+  return fetch(BACKEND_ROOT_URL + PARKING_LOT_ATTENDANT_SERVICE + '/' + REGISTER, {
     method: 'POST',
     headers: {
       Accept: 'application/json',
@@ -26,6 +26,10 @@ export const createNewParkingLotAttendant = (name, username, email, phoneNumber)
       email: email,
       phoneNumber: phoneNumber
     }),
+  })
+  .then((response) => response.status)
+  .then((responseStatus) => {
+    return responseStatus;
   })
   .catch((error) => {
     console.error(error);

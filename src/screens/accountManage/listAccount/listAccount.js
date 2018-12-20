@@ -12,6 +12,7 @@ import styles from './styles';
 import ItemListAcc from './ItemListAcc';
 import Searchbar from "./../../searchbar/searchbar";
 import { getAllParkingLotAttendants } from "./../../../actions/parkingLotAttendant";
+import { StackActions, NavigationActions } from 'react-navigation';
 
 
 class ListAccount extends Component {
@@ -34,6 +35,15 @@ class ListAccount extends Component {
 		getAllParkingLotAttendants().then((response) => {
 			this.setState({ data: response });
 		});
+	}
+
+	create = () => {
+		// navigate and remove from stack
+		const resetAction = StackActions.reset({
+			index: 0,
+			actions: [NavigationActions.navigate({ routeName: 'CreateAcc' })],
+		});
+		this.props.navigation.dispatch(resetAction);
 	}
 
 
@@ -68,7 +78,7 @@ class ListAccount extends Component {
 					<FooterTab>
 						<Button
 							rounded
-							onPress={() => navigate('CreateAcc')}
+							onPress={this.create}
 						>
 							<Text style={{ fontSize: 20, fontWeight: 'bold', color: '#fff' }}>+</Text>
 						</Button>

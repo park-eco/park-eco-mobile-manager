@@ -26,6 +26,10 @@ export const createNewParkingLot = (name, address, description) => {
       description: description
     }),
   })
+  .then((response) => response.status)
+  .then((responseStatus) => {
+    return responseStatus;
+  })
   .catch((error) => {
     console.error(error);
   });

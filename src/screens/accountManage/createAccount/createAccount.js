@@ -16,6 +16,7 @@ import {
 import Searchbar from './../../searchbar/searchbar';
 import { COLOR } from 'react-native-material-ui';
 import validate from './../../validation/validate_wrapper'
+import { createNewParkingLotAttendant } from './../../../actions/parkingLotAttendant';
 import styles from './styles';
 
 class CreateAccount extends Component {
@@ -35,7 +36,15 @@ class CreateAccount extends Component {
     }
 
     onCreate = () => {
-        console.log(this.state);
+        if (!this.state.nameError && !this.state.usernameError && !this.state.emailError && !this.state.phoneNumberError) {
+            console.log('dm');
+            createNewParkingLotAttendant(this.state.name, this.state.username, this.state.email, this.state.phoneNumber).then((response) => {
+                console.log(response);
+                if (response == 200) {
+                    this.props.navigation.navigate('ListAcc');
+                }
+            });
+        }
     }
 
     render() {
