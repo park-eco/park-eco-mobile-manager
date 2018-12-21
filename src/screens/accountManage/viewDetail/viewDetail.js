@@ -13,10 +13,11 @@ import {
     Thumbnail,
     View
 } from 'native-base';
-import { Image, Dimensions } from 'react-native';
+import { Image, Dimensions, TouchableOpacity, Linking } from 'react-native';
 import Searchbar from './../../searchbar/searchbar';
 import { COLOR } from 'react-native-material-ui';
 import { getAttendant } from './../../../actions/parkingLotAttendant';
+import call from 'react-native-phone-call'
 
 import styles from './styles';
 
@@ -36,6 +37,28 @@ class ViewDetail extends Component {
         getAttendant(username).then((response) => {
             this.setState({ user: response[0] });
         });
+    }
+
+    _onCall = () => {
+        const args = {
+            number: this.state.user.phoneNumber,
+            prompt: false // Optional boolean property. Determines if the user should be prompt prior to the call 
+        };
+
+        call(args).catch(console.error);
+    }
+
+    _onMail = () => {
+        const url = 'mailto:support@example.com?subject=SendMail&body=Description';
+        const urlbrowser = 'https://mail.google.com/mail/u/0/#inbox?compose=new';
+        Linking.canOpenURL(url).then(supported => {
+            if (!supported) {
+                console.log('Can\'t handle url: ' + url);
+                return Linking.openURL(urlbrowser);
+            } else {
+                return Linking.openURL(url);
+            }
+        }).catch(err => console.error('An error occurred', err));
     }
 
     render() {
@@ -107,8 +130,13 @@ class ViewDetail extends Component {
                         </Item>
                     </Form>
                     <View style={{ flexDirection: 'row', marginLeft: width * 0.1 }}>
-                        <Image source={require('./../../../../assets/mail.gif')} style={{ width: width * 0.2, height: width * 0.2, marginTop: 35 }} />
-                        <Image source={require('./../../../../assets/call.gif')} style={{ width: width * 0.4, height: width * 0.4, marginLeft: width * 0.25 }} />
+                        <TouchableOpacity onPress={this._onMail}>
+                            <Image source={require('./../../../../assets/mail.gif')} style={{ width: width * 0.2, height: width * 0.2, marginTop: 35 }} />
+                        </TouchableOpacity>
+
+                        <TouchableOpacity onPress={this._onCall}>
+                            <Image source={require('./../../../../assets/call.gif')} style={{ width: width * 0.4, height: width * 0.4, marginLeft: width * 0.25 }} />
+                        </TouchableOpacity>
                     </View>
                 </Content>
 
