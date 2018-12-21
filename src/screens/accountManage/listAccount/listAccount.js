@@ -55,8 +55,6 @@ class ListAccount extends Component {
 							<ItemListAccount key={data.id}
 								username={data.username}
 								name={data.name}
-								email={data.email}
-								phoneNumber={data.phoneNumber}
 								navigate={navigate}
 							>
 							</ItemListAccount>
