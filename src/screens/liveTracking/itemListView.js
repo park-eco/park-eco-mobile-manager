@@ -22,7 +22,6 @@ class ItemListView extends Component {
 	}
 
 	onPress(phoneNumber) {
-		console.log(phoneNumber);
 		const args = {
 			number: phoneNumber,
 			prompt: false // Optional boolean property. Determines if the user should be prompt prior to the call 

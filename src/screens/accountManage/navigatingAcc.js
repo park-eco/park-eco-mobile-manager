@@ -5,16 +5,16 @@ import ListAccount from './listAccount/listAccount';
 import CreateAccount from './createAccount/createAccount';
 import ViewDetail from './viewDetail/viewDetail';
 
-const NavigatingAcc = createStackNavigator(
+const NavigatingAccount = createStackNavigator(
   {
-    ListAcc: { screen: ListAccount },
-    CreateAcc: { screen: CreateAccount },
+    ListAccount: { screen: ListAccount },
+    CreateAccount: { screen: CreateAccount },
     ViewDetail: { screen: ViewDetail },
   },
   {
-    initialRouteName: "ListAcc",
+    initialRouteName: "ListAccount",
     headerMode: "none"
   }
 );
 
-export default NavigatingAcc;
+export default NavigatingAccount;

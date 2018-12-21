@@ -12,7 +12,7 @@ import {
   Badge
 } from "native-base";
 import { COLOR } from 'react-native-material-ui';
-import { getLoggedinUser } from './../../actions/authenticationAction'
+import { getAttendant } from './../../actions/parkingLotAttendant'
 import styles from "./style";
 
 const drawerCover = require("../../../assets/background-login1.jpg");
@@ -69,7 +69,7 @@ class SideBar extends Component {
   componentDidMount() {
     const username = this.props.navigation.getParam('username', 'null');
     
-    getLoggedinUser(username).then((response) => {
+    getAttendant(username).then((response) => {
       this.setState({ user: response[0] });
     });
   }

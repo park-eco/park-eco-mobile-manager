@@ -15,27 +15,41 @@ import {
 } from 'native-base';
 import Searchbar from './../../searchbar/searchbar';
 import { COLOR } from 'react-native-material-ui';
+import validate from './../../validation/validate_wrapper'
+import { createNewParkingLotAttendant } from './../../../actions/parkingLotAttendant';
+import { StackActions, NavigationActions } from 'react-navigation';
+
 import styles from './styles';
 
 class CreateAccount extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            txtName: '',
-            nameValidate: true,
-            txtUseName: '',
-            useNameValidate: true,
-            txtEmail: '',
-            emailValidate: true,
-            txtPhone: '',
-            phoneValidate: true,
-            txtAddress: '',
-            addressValidate: true,
+            name: '',
+            nameError: null,
+            username: '',
+            usernameError: null,
+            email: '',
+            emailError: null,
+            phoneNumber: '',
+            phoneNumberError: null,
+            address: '',
         };
     }
 
     onCreate = () => {
-        console.log(this.state);
+        if (!this.state.nameError && !this.state.usernameError && !this.state.emailError && !this.state.phoneNumberError) {
+            createNewParkingLotAttendant(this.state.name, this.state.username, this.state.email, this.state.phoneNumber).then((response) => {
+                if (response == 200) {
+                    // navigate and remove from stack
+                    const resetAction = StackActions.reset({
+                        index: 0,
+                        actions: [NavigationActions.navigate({ routeName: 'ViewDetail', params: { username: this.state.username } })],
+                    });
+                    this.props.navigation.dispatch(resetAction);
+                }
+            });
+        }
     }
 
     render() {
@@ -61,66 +75,85 @@ class CreateAccount extends Component {
                         <Item>
                             <Icon active name="person" style={{ fontSize: 30, color: '#387ef5' }} />
                             <Input
-                                placeholder="Enter name"
-                                value={this.state.txtName}
+                                placeholder="Enter fullname"
+                                value={this.state.name}
                                 onChangeText={text => {
-                                    this.setState({ ...this.state, txtName: text });
+                                    this.setState({ ...this.state, name: text });
                                 }}
+                                onBlur={() => this.setState({
+                                    nameError: validate('required', this.state.name)
+                                })}
                             />
+                            {this.state.nameError ? <Text style={{ color: COLOR.red400 }}>{this.state.nameError}</Text> : null}
                         </Item>
                         <Item>
                             <Icon active name="eye" style={{ fontSize: 30, color: '#387ef5' }} />
                             <Input
                                 placeholder="Enter usename"
-                                value={this.state.txtUseName}
+                                value={this.state.username}
                                 onChangeText={text => {
-                                    this.setState({ ...this.state, txtUseName: text });
+                                    this.setState({ ...this.state, username: text });
                                 }}
+                                onBlur={() => this.setState({
+                                    usernameError: validate('required', this.state.username)
+                                })}
                             />
+                            {this.state.usernameError ? <Text style={{ color: COLOR.red400 }}>{this.state.usernameError}</Text> : null}
                         </Item>
                         <Item>
                             <Icon active name="mail" style={{ fontSize: 30, color: '#387ef5' }} />
                             <Input
                                 placeholder="Enter email"
-                                value={this.state.txtEmail}
+                                value={this.state.email}
                                 onChangeText={text =>
-                                    this.setState({ ...this.state, txtEmail: text })}
+                                    this.setState({ ...this.state, email: text })}
+                                onBlur={() => this.setState({
+                                    emailError: validate('email', this.state.email)
+                                })}
                             />
+                            {this.state.emailError ? <Text style={{ color: COLOR.red400 }}>{this.state.emailError}</Text> : null}
                         </Item>
                         <Item>
                             <Icon active name="call" style={{ fontSize: 30, color: '#387ef5' }} />
                             <Input
                                 placeholder="Enter phone number"
-                                value={this.state.txtPhone}
+                                value={this.state.phoneNumber}
                                 onChangeText={text => {
-                                    this.setState({ ...this.state, txtPhone: text })
+                                    this.setState({ ...this.state, phoneNumber: text })
                                 }}
+                                onBlur={() => this.setState({
+                                    phoneNumberError: validate('phoneNumber', this.state.phoneNumber)
+                                })}
                             />
+                            {this.state.phoneNumberError ? <Text style={{ color: COLOR.red400 }}>{this.state.phoneNumberError}</Text> : null}
                         </Item>
                         <Item>
                             <Icon active name="home" style={{ fontSize: 30, color: '#387ef5' }} />
                             <Input
                                 placeholder="Enter address"
-                                value={this.state.txtAddress}
+                                value={this.state.address}
                                 onChangeText={text =>
-                                    this.setState({ ...this.state, txtAddress: text })}
+                                    this.setState({ ...this.state, address: text })}
                             />
                         </Item>
                     </Form>
-
-
-                    <Text style={{ color: 'red', paddingTop: 10 }}>
-                        {this.state.error}
-                    </Text>
                 </Content>
 
                 <Footer style={{ backgroundColor: COLOR.blue400 }}>
                     <FooterTab>
                         <Button
                             rounded
+                            onPress={()=> this.props.navigation.navigate('ListAccount')}
+                        >
+                            <Text style={{ fontSize: 16, color: '#fff' }}>cancel</Text>
+                        </Button>
+                    </FooterTab>
+                    <FooterTab>
+                        <Button
+                            rounded
                             onPress={this.onCreate}
                         >
-                            <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#fff' }}>submit</Text>
+                            <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#fff' }}>submit</Text>
                         </Button>
                     </FooterTab>
                 </Footer>

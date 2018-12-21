@@ -10,7 +10,8 @@ import {
     View
 } from "native-base";
 import { COLOR } from 'react-native-material-ui';
-class ItemListAcc extends Component {
+
+class ItemListAccount extends Component {
     constructor(props) {
         super(props);
 
@@ -18,7 +19,7 @@ class ItemListAcc extends Component {
     }
 
     onPress() {
-        this.props.navigate('ViewDetail');
+        this.props.navigate('ViewDetail', { username: this.props.username });
     }
 
     render() {
@@ -58,4 +59,4 @@ class ItemListAcc extends Component {
     }
 }
 
-export default ItemListAcc;
+export default ItemListAccount;

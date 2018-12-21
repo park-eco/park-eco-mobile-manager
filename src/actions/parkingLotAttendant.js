@@ -1,9 +1,29 @@
 import { BACKEND_ROOT_URL, PARKING_LOT_ATTENDANT_SERVICE, REGISTER } from './Config';
 
 // Call the API to get information of all available parking lot attendants
-export const getAllParkingLotAttendants = () => {
+export const getAllAttendants = () => {
   return fetch(BACKEND_ROOT_URL + PARKING_LOT_ATTENDANT_SERVICE)
-    .then((response) => response.json())
+    .then((response) => {
+      if (response.status == 200) {
+        return response.json();
+      }
+    })
+    .then((responseJson) => {
+      return responseJson;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+// Call the API to get information of the attendant by username
+export const getAttendant = (username) => {
+  return fetch(BACKEND_ROOT_URL + PARKING_LOT_ATTENDANT_SERVICE + '?username=' + username)
+    .then((response) => {
+      if (response.status == 200) {
+        return response.json();
+      }
+    })
     .then((responseJson) => {
       return responseJson;
     })
@@ -14,7 +34,7 @@ export const getAllParkingLotAttendants = () => {
 
 // Call the API to create new parking lot attendant
 export const createNewParkingLotAttendant = (name, username, email, phoneNumber) => {
-  return fetch(BACKEND_ROOT_URL + PARKING_SERVICE + '/' + REGISTER, {
+  return fetch(BACKEND_ROOT_URL + PARKING_LOT_ATTENDANT_SERVICE + '/' + REGISTER, {
     method: 'POST',
     headers: {
       Accept: 'application/json',
@@ -27,7 +47,11 @@ export const createNewParkingLotAttendant = (name, username, email, phoneNumber)
       phoneNumber: phoneNumber
     }),
   })
-  .catch((error) => {
-    console.error(error);
-  });
+    .then((response) => response.status)
+    .then((responseStatus) => {
+      return responseStatus;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 }
