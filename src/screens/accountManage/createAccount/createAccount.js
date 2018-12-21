@@ -17,6 +17,8 @@ import Searchbar from './../../searchbar/searchbar';
 import { COLOR } from 'react-native-material-ui';
 import validate from './../../validation/validate_wrapper'
 import { createNewParkingLotAttendant } from './../../../actions/parkingLotAttendant';
+import { StackActions, NavigationActions } from 'react-navigation';
+
 import styles from './styles';
 
 class CreateAccount extends Component {
@@ -37,11 +39,14 @@ class CreateAccount extends Component {
 
     onCreate = () => {
         if (!this.state.nameError && !this.state.usernameError && !this.state.emailError && !this.state.phoneNumberError) {
-            console.log('dm');
             createNewParkingLotAttendant(this.state.name, this.state.username, this.state.email, this.state.phoneNumber).then((response) => {
-                console.log(response);
                 if (response == 200) {
-                    this.props.navigation.navigate('ListAcc');
+                    // navigate and remove from stack
+                    const resetAction = StackActions.reset({
+                        index: 0,
+                        actions: [NavigationActions.navigate({ routeName: 'ViewDetail', params: { username: this.state.username } })],
+                    });
+                    this.props.navigation.dispatch(resetAction);
                 }
             });
         }
@@ -132,20 +137,23 @@ class CreateAccount extends Component {
                             />
                         </Item>
                     </Form>
-
-
-                    <Text style={{ color: 'red', paddingTop: 10 }}>
-                        {this.state.error}
-                    </Text>
                 </Content>
 
                 <Footer style={{ backgroundColor: COLOR.blue400 }}>
                     <FooterTab>
                         <Button
                             rounded
+                            onPress={()=> this.props.navigation.navigate('ListAccount')}
+                        >
+                            <Text style={{ fontSize: 16, color: '#fff' }}>cancel</Text>
+                        </Button>
+                    </FooterTab>
+                    <FooterTab>
+                        <Button
+                            rounded
                             onPress={this.onCreate}
                         >
-                            <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#fff' }}>submit</Text>
+                            <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#fff' }}>submit</Text>
                         </Button>
                     </FooterTab>
                 </Footer>

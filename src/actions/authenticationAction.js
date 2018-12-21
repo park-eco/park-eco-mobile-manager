@@ -20,15 +20,3 @@ export const logIn = (username, password) => {
       console.error(error);
     });
 }
-
-// Call the API to get information of the user just loged in system
-export const getLoggedinUser = (username) => {
-  return fetch(BACKEND_ROOT_URL + PARKING_LOT_ATTENDANT_SERVICE + '?username=' + username)
-    .then((response) => response.json())
-    .then((responseJson) => {
-      return responseJson;
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-}

@@ -9,10 +9,9 @@ import {
 } from 'native-base';
 import { COLOR } from 'react-native-material-ui';
 import styles from './styles';
-import ItemListAcc from './ItemListAcc';
+import ItemListAccount from './itemListAcc';
 import Searchbar from "./../../searchbar/searchbar";
-import { getAllParkingLotAttendants } from "./../../../actions/parkingLotAttendant";
-import { StackActions, NavigationActions } from 'react-navigation';
+import { getAllAttendants } from "./../../../actions/parkingLotAttendant";
 
 
 class ListAccount extends Component {
@@ -24,26 +23,17 @@ class ListAccount extends Component {
 	}
 
 	sortByNameAZ = () => {
-		this.setState({ data: this.state.data.sort((a, b) => a.Name.localeCompare(b.Name)) });
+		this.setState({ data: this.state.data.sort((a, b) => a.name.localeCompare(b.name)) });
 	}
 
 	sortByNameZA = () => {
-		this.setState({ data: this.state.data.sort((a, b) => b.Name.localeCompare(a.Name)) });
+		this.setState({ data: this.state.data.sort((a, b) => b.name.localeCompare(a.name)) });
 	}
 
 	componentDidMount() {
-		getAllParkingLotAttendants().then((response) => {
+		getAllAttendants().then((response) => {
 			this.setState({ data: response });
 		});
-	}
-
-	create = () => {
-		// navigate and remove from stack
-		const resetAction = StackActions.reset({
-			index: 0,
-			actions: [NavigationActions.navigate({ routeName: 'CreateAcc' })],
-		});
-		this.props.navigation.dispatch(resetAction);
 	}
 
 
@@ -62,14 +52,14 @@ class ListAccount extends Component {
 				<Content>
 					{this.state.data.map(data => {
 						return (
-							<ItemListAcc key={data.id}
+							<ItemListAccount key={data.id}
 								username={data.username}
 								name={data.name}
 								email={data.email}
 								phoneNumber={data.phoneNumber}
 								navigate={navigate}
 							>
-							</ItemListAcc>
+							</ItemListAccount>
 						)
 					})}
 				</Content>
@@ -78,7 +68,7 @@ class ListAccount extends Component {
 					<FooterTab>
 						<Button
 							rounded
-							onPress={this.create}
+							onPress={() => this.props.navigation.navigate('CreateAccount')}
 						>
 							<Text style={{ fontSize: 20, fontWeight: 'bold', color: '#fff' }}>+</Text>
 						</Button>
