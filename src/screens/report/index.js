@@ -7,7 +7,7 @@ import {
 	Button,
 	Icon,
 } from 'native-base';
-import { data, pieChartData } from './data';
+import { data, pieChartData, detailTableData, theParkings } from './data';
 import Picker from 'react-native-picker';
 
 import AllParkingChart from './allParkingChart';
@@ -26,7 +26,7 @@ const chartConfig = {
 	color: (opacity = 1) => `rgba(${255}, ${255}, ${255}, ${opacity})`
 }
 
-const parkings = ['All Parkings', 'Suối Tiên', 'Đầm Sen', 'CV Lê Thị Riêng', 'Coop Extra Linh Trung'];
+const parkings = theParkings;
 const types = ['Daily', 'Weekly', 'Monthly'];
 
 const date = new Date();
@@ -42,7 +42,8 @@ class Report extends Component {
 			selectedType: types[0],
 			selectedDateFrom: `${currentYear}-${currentMonth}-${currentDate - 1}`,
 			selectedDateTo: `${currentYear}-${currentMonth}-${currentDate}`,
-			chartType: 0
+			chartType: 0,
+			chartLabel: `All Parkings ${types[0]} Chart`
 		}
 
 		this._showDatePicker = this._showDatePicker.bind(this);
@@ -144,7 +145,8 @@ class Report extends Component {
 
 	_viewChart() {
 		if (this.state.selectedParking == parkings[0]) {
-			this.setState({ chartType: 0 });
+			// Chart all parking
+			this.setState({ chartType: 0, chartLabel: `All Parkings ${this.state.selectedType} Chart` });
 		} else {
 			// Daily type chart for 1 parking
 			if (this.state.selectedType == types[0]) {
@@ -185,8 +187,8 @@ class Report extends Component {
 
 		return (
 			<Container style={styles.container}>
-				<Searchbar
-					title="Report" />
+				{/* <Searchbar
+					title="Report" /> */}
 
 				<View style={{ ...styles.containerFilter, maxHeight: height * 0.25 }}>
 					<View style={styles.rowFilter}>
@@ -197,7 +199,7 @@ class Report extends Component {
 							}}
 							onPress={this._showParkingPicker.bind(this)}>
 							<Text>{this.state.selectedParking}</Text>
-							<Icon name='arrow-down' />
+							<Icon name='ios-arrow-down' type='Ionicons' />
 						</Button>
 
 						<Button iconRight
@@ -207,7 +209,7 @@ class Report extends Component {
 							}}
 							onPress={this._showTypePicker.bind(this)}>
 							<Text>{this.state.selectedType}</Text>
-							<Icon name='arrow-down' />
+							<Icon name='ios-arrow-down' type='Ionicons' />
 						</Button>
 					</View>
 					<View style={{
@@ -261,8 +263,7 @@ class Report extends Component {
 								chartConfig={chartConfig}
 								style={graphStyle}
 								labelStyle={labelStyle}
-								labelChart={'All Parkings Daily Chart'}
-								labelTable={'All Parkings Detailed Statistics Table'}>
+								labelChart={this.state.chartLabel}>
 							</AllParkingChart>
 						}
 
@@ -304,7 +305,9 @@ class Report extends Component {
 
 						<TableDetail
 							labelStyle={labelStyle}
-							labelTable={'Detailed Statistics Table'}>
+							labelTable={'Detailed Statistics Table'}
+							theParkings={parkings}
+							detailData={detailTableData}>
 						</TableDetail>
 
 					</ScrollView>
