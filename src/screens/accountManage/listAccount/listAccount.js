@@ -9,7 +9,7 @@ import {
 } from 'native-base';
 import { COLOR } from 'react-native-material-ui';
 import styles from './styles';
-import ItemListAccount from './itemListAcc';
+import ItemListAccount from './ItemListAcc';
 import Searchbar from "./../../searchbar/searchbar";
 import { getAllAttendants } from "./../../../actions/parkingLotAttendant";
 
