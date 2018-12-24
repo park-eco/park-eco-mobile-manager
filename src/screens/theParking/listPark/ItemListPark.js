@@ -28,7 +28,7 @@ class ItemListPark extends Component {
                 <CardItem style={{}}>
                     <Body style={{ justifyContent: 'center' }}>
                         <View style={{ flexDirection: 'row' }}>
-                            <Thumbnail square source={require('./../../../../assets/parkingLot.jpg')}
+                            <Thumbnail square source={require('./../../../../assets/parkingLot.png')}
                                 style={{ width: 60, height: 60, marginRight: 10 }} />
 
                             <View style={{ justifyContent: 'flex-end' }}>

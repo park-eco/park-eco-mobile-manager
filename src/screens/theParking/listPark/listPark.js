@@ -52,7 +52,7 @@ class ListAccount extends Component {
 				<Content>
 					{this.state.data.map(data => {
 						return (
-							<ItemListPark
+							<ItemListPark key={data.name}
 								name={data.name}
 								location={data.address}
 								navigate={navigate}
