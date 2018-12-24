@@ -2,7 +2,7 @@
 A mobile management application for managers of ParkEco system. Take control of the parking lots in your system everywhere you go.
 
 <p align="center">
-   <img src="assets/screenshots/Login.png" height = "480" width="270"> <img src="assets/screenshots/HumanManagement.png" height = "480" width="270"> <img src="assets/screenshots/LiveTracking-MapMode.png" height = "480" width="270">
+   <img src="assets/screenshots/Login.png" height="480"> <img src="assets/screenshots/HumanManagement.png" height="480"> <img src="assets/screenshots/LiveTracking-MapMode.png" height="480">
 </p>
 
 # Usage 
