@@ -1,9 +1,57 @@
 # park-eco-mobile-manager 💼
-A mobile manager application for managers of ParkEco system.
+A mobile management application for managers of ParkEco system. Take control of the parking lots in your system everywhere you go.
+
+<p align="center">
+   <img src="assets/screenshots/login.png" height = "480" width="270"> <img src="assets/screenshots/HumanManagement.png" height = "480" width="270"> <img src="assets/screenshots/LiveTracking-MapMode.png" height = "480" width="270">
+</p>
 
 # Usage 
 
+With ParkEco Mobile Manager, you can:
+- Create and manage parking lots in a system. See live updates on a real map.
+<p align="center">
+   <img src="assets/screenshots/LiveTracking-ListMode.png" height="320"> <img src="assets/screenshots/LiveTracking-MapMode.png" height="320">
+</p>
+
+- Create and manage parking lot attendants.
+<p align="center">
+   <img src="assets/screenshots/CreateUser.png" height="320"> <img src="assets/screenshots/Detail.png" height="320"> <img src="assets/screenshots/HumanManagement.png" height="320">
+</p>
+
+
+- Connect and manage different systems.
+
+
+- View and export helpful reports and insights.
+<p align="center">
+   <img src="assets/screenshots/Report.png" height="320">
+</p>
+
+
 # Build from source
+
+Clone this repository to your machine.
+```
+git clone https://github.com/park-eco/park-eco-mobile-manager.git
+```
+
+Make sure you have npm (or yarn) and [react-native-cli](https://www.npmjs.com/package/react-native-cli) installed globally. 
+
+First, restore the packages.
+```
+npm install 
+// or using "yarn install"
+``` 
+
+If using Windows, you may want to connect to a physical device or run an emulator first, then run:
+```
+react-native run-android
+```
+
+Alternatively, for iOS:
+```
+react-native run-ios
+```
 
 # Technology Stack 📚
 - [ReactNative](https://github.com/facebook/react-native) as a powerful cross-platform framework.
