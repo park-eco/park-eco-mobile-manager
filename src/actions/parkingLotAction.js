@@ -16,6 +16,22 @@ export const getAllParkingLots = () => {
     });
 }
 
+// Call the API to get information of the parkinglot by name
+export const getParkingLot = (name) => {
+  return fetch(BACKEND_ROOT_URL + PARKING_SERVICE + '?name=' + name)
+    .then((response) => {
+      if (response.status == 200) {
+        return response.json();
+      }
+    })
+    .then((responseJson) => {
+      return responseJson;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
 // Call the API to create new parking lot
 export const createNewParkingLot = (name, address, description) => {
   return fetch(BACKEND_ROOT_URL + PARKING_SERVICE, {
