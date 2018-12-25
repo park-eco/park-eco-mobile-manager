@@ -13,7 +13,7 @@ import {
 	Thumbnail,
 	View
 } from 'native-base';
-import { Image, Dimensions, TouchableOpacity, Linking } from 'react-native';
+import { Image, Dimensions, TouchableOpacity, Linking, Alert } from 'react-native';
 import Searchbar from './../../searchbar/searchbar';
 import { COLOR } from 'react-native-material-ui';
 import { getAttendant } from './../../../actions/parkingLotAttendant';
@@ -59,6 +59,29 @@ class ViewDetail extends Component {
 				return Linking.openURL(url);
 			}
 		}).catch(err => console.error('An error occurred', err));
+	}
+
+	_onRemove = () => {
+		Alert.alert(
+			'Verify',
+			'Are you sure to remove this user?',
+			[
+				{ text: 'Cancel', style: 'cancel' },
+				{ text: 'OK', onPress: () => this.remove(), style: 'default' },
+			]
+		)
+	}
+
+	remove = () => {
+		removeAttendant(this.state.user.id).then((response) => {
+			if (response == 200) {
+				const resetAction = StackActions.reset({
+					index: 0,
+					actions: [NavigationActions.navigate({ routeName: 'ListAccount' })],
+				});
+				this.props.navigation.dispatch(resetAction);
+			}
+		});
 	}
 
 	render() {
@@ -155,6 +178,14 @@ class ViewDetail extends Component {
 							onPress={() => this.props.navigation.navigate('EditAccount', { user: this.state.user })}
 						>
 							<Text style={{ fontSize: 16, color: '#fff' }}>Edit</Text>
+						</Button>
+					</FooterTab>
+					<FooterTab>
+						<Button
+							rounded
+							onPress={this._onRemove}
+						>
+							<Text style={{ fontSize: 16, color: '#fff' }}>Remove</Text>
 						</Button>
 					</FooterTab>
 				</Footer>
