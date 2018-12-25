@@ -13,6 +13,8 @@ import {
 } from "native-base";
 import { COLOR } from 'react-native-material-ui';
 import { getAttendant } from './../../actions/parkingLotAttendant'
+import { StackActions, NavigationActions } from 'react-navigation';
+
 import styles from "./style";
 
 const drawerCover = require("../../../assets/background-login1.jpg");
@@ -63,7 +65,11 @@ class SideBar extends Component {
   }
 
   _logout = () => {
-    this.props.navigation.navigate('Login');
+    const resetAction = StackActions.reset({
+			index: 0,
+			actions: [NavigationActions.navigate({ routeName: 'Login' })],
+		});
+		this.props.navigation.dispatch(resetAction);
   }
 
   componentDidMount() {

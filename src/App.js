@@ -6,7 +6,7 @@ import SideBar from "./screens/sidebar";
 import Login from "./screens/login";
 import LiveTracking from "./screens/liveTracking";
 import NavigatingAcc from "./screens/accountManage/navigatingAcc";
-import TheParking from "./screens/theParking";
+import TheParking from "./screens/theParking/navigatingPark";
 import Revenue from "./screens/revenue";
 import Report from "./screens/report";
 

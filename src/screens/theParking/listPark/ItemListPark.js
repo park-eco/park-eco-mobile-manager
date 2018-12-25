@@ -19,7 +19,7 @@ class ItemListPark extends Component {
     }
 
     onPress() {
-        this.props.navigate('ViewDetail', { name: this.props.name });
+        this.props.navigate('ViewDetail', { parking: this.props.parking });
     }
 
     render() {

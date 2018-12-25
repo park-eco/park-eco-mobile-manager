@@ -47,12 +47,13 @@ class ListAccount extends Component {
 					sortDecrease={this.sortByNameZA}
 					iconIncrease="sort-by-alpha"
 					iconDecrease="sort-by-alpha"
-					title="Parking Lot" />
+					title="Parking Lots" />
 
 				<Content>
 					{this.state.data.map(data => {
 						return (
-							<ItemListPark key={data.name}
+							<ItemListPark key={data.id}
+								parking={data}
 								name={data.name}
 								location={data.address}
 								navigate={navigate}
@@ -62,8 +63,8 @@ class ListAccount extends Component {
 					})}
 				</Content>
 
-				<Footer>
-					<FooterTab style={styles.footerTab}>
+				<Footer style={{ backgroundColor: COLOR.blue400 }}>
+					<FooterTab>
 						<Button
 							rounded
 							onPress={() => this.props.navigation.navigate('AddPark')}

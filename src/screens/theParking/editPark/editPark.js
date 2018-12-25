@@ -97,7 +97,7 @@ class EditPark extends Component {
               <Icon active name="md-pin" style={{ fontSize: 30, color: '#387ef5' }} />
               <Input
                 placeholder="Let's update longitude"
-                value={this.state.parkingLot.longitude}
+                value={this.state.parkingLot.longitude + ''}
                 onChangeText={text => {
                   this.setState({ ...this.state, parkingLot: { ...this.state.parkingLot, longitude: text } });
                 }}
@@ -109,7 +109,7 @@ class EditPark extends Component {
               <Icon active name="md-pin" style={{ fontSize: 30, color: '#387ef5' }} />
               <Input
                 placeholder="Let's update latitude"
-                value={this.state.parkingLot.latitude}
+                value={this.state.parkingLot.latitude + ''}
                 onChangeText={text => {
                   this.setState({ ...this.state, parkingLot: { ...this.state.parkingLot, latitude: text } });
                 }}
@@ -122,6 +122,7 @@ class EditPark extends Component {
               <Input
                 placeholder="Let's update description"
                 value={this.state.parkingLot.description}
+                multiline={true}
                 onChangeText={text => {
                   this.setState({ ...this.state, parkingLot: { ...this.state.parkingLot, description: text } });
                 }}
@@ -130,8 +131,8 @@ class EditPark extends Component {
           </Form>
         </Content>
 
-        <Footer>
-          <FooterTab style={styles.footerTab}>
+        <Footer style={{ backgroundColor: COLOR.blue400 }}>
+          <FooterTab>
             <Button
               rounded
               onPress={() => this.props.navigation.goBack()}
@@ -139,7 +140,7 @@ class EditPark extends Component {
               <Text style={{ fontSize: 16, color: '#fff' }}>cancel</Text>
             </Button>
           </FooterTab>
-          <FooterTab style={styles.footerTab}>
+          <FooterTab>
             <Button
               rounded
               onPress={this._onEdit}

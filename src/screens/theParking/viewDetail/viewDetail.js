@@ -13,7 +13,6 @@ import {
 	Thumbnail,
 	View
 } from 'native-base';
-import { Image, Dimensions, TouchableOpacity, Linking } from 'react-native';
 import Searchbar from './../../searchbar/searchbar';
 import { COLOR } from 'react-native-material-ui';
 import { getParkingLot } from './../../../actions/parkingLotAction';
@@ -24,29 +23,30 @@ class ViewDetail extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			title: '',
 			parkingLot: {}
 		};
 	}
 
 	componentDidMount() {
-		const name = this.props.navigation.getParam('name', 'null');
-		this.setState({ title: name + ' Parking Lot' });
+		const parking = this.props.navigation.getParam('parking', null);
 
-		getParkingLot(name).then((response) => {
-			this.setState({ parkingLot: response[0] });
-		});
+		if (name != null) {
+			this.setState({ parkingLot: parking });
+		}
+
+		// have not getparkinglot by name, yet
+		// getParkingLot(name).then((response) => {
+		// 	this.setState({ parkingLot: response[0] });
+		// });
 	}
 
 	render() {
-		const width = Dimensions.get('window').width;
-
 		return (
 			<Container style={styles.container}>
 				<Searchbar
 					sortIncrease={this.sortByNameAZ}
 					sortDecrease={this.sortByNameZA}
-					title={this.state.title} />
+					title={this.state.parkingLot.name} />
 
 				<Content padder>
 					<View style={{
@@ -61,12 +61,11 @@ class ViewDetail extends Component {
 
 					<Form>
 						<Item>
-							<Text style={{ color: '#387ef5' }} >Name </Text>
 							<Input
 								placeholder="Let's update name"
 								value={this.state.parkingLot.name}
 								disabled
-								style={{ color: COLOR.grey700 }}
+								style={{ color: COLOR.grey700, textAlign: "center" }}
 							/>
 						</Item>
 						<Item>
@@ -82,7 +81,7 @@ class ViewDetail extends Component {
 							<Icon active name="md-pin" style={{ fontSize: 30, color: '#387ef5' }} />
 							<Input
 								placeholder="Let's update longitude"
-								value={this.state.parkingLot.longitude}
+								value={this.state.parkingLot.longitude + ''}
 								disabled
 								style={{ color: COLOR.grey700 }}
 							/>
@@ -91,7 +90,7 @@ class ViewDetail extends Component {
 							<Icon active name="md-pin" style={{ fontSize: 30, color: '#387ef5' }} />
 							<Input
 								placeholder="Let's update latitude"
-								value={this.state.parkingLot.latitude}
+								value={this.state.parkingLot.latitude + ''}
 								disabled
 								style={{ color: COLOR.grey700 }}
 							/>
@@ -102,14 +101,15 @@ class ViewDetail extends Component {
 								placeholder="Let's update description"
 								value={this.state.parkingLot.description}
 								disabled
+								multiline={true}
 								style={{ color: COLOR.grey700 }}
 							/>
 						</Item>
 					</Form>
 				</Content>
 
-				<Footer>
-					<FooterTab style={styles.footerTab}>
+				<Footer style={{ backgroundColor: COLOR.blue400 }}>
+					<FooterTab>
 						<Button
 							rounded
 							onPress={() => this.props.navigation.navigate('ListPark')}
@@ -117,7 +117,7 @@ class ViewDetail extends Component {
 							<Text style={{ fontSize: 16, fontWeight: 'bold', color: '#fff' }}>Good!</Text>
 						</Button>
 					</FooterTab>
-					<FooterTab style={styles.footerTab}>
+					<FooterTab>
 						<Button
 							rounded
 							onPress={() => this.props.navigation.navigate('EditPark', { parkingLot: this.state.parkingLot })}
