@@ -11,7 +11,8 @@ import {
   Footer,
   FooterTab,
   Thumbnail,
-  View
+  View,
+  Label
 } from 'native-base';
 import Searchbar from '../../searchbar/searchbar';
 import { COLOR } from 'react-native-material-ui';
@@ -38,16 +39,7 @@ class EditPark extends Component {
 
   _onEdit = () => {
     if (!this.state.nameError) {
-      // createNewParkingLotAttendant(this.state.name, this.state.username, this.state.email, this.state.phoneNumber).then((response) => {
-      //   if (response == 200) {
-      //     // navigate and remove from stack
-      //     const resetAction = StackActions.reset({
-      //       index: 0,
-      //       actions: [NavigationActions.navigate({ routeName: 'ViewDetail', params: { username: this.state.username } })],
-      //     });
-      //     this.props.navigation.dispatch(resetAction);
-      //   }
-      // });
+
     }
   }
 
@@ -71,7 +63,10 @@ class EditPark extends Component {
           </View>
 
           <Form>
-            <Item rounded>
+            <Item inlineLabel
+              style={!this.state.nameError ? styles.input : styles.inputError}
+            >
+              <Label style={styles.lableInput}>Name</Label>
               <Input
                 placeholder="Let's update name"
                 value={this.state.parkingLot.name}
@@ -84,13 +79,51 @@ class EditPark extends Component {
               />
               {this.state.nameError ? <Text style={{ color: COLOR.red400 }}>{this.state.nameError}</Text> : null}
             </Item>
-            <Item rounded>
+            <Item inlineLabel
+              style={styles.input}
+            >
               <Icon active name="home" style={{ fontSize: 30, color: '#387ef5' }} />
               <Input
                 placeholder="Let's update address"
                 value={this.state.parkingLot.address}
                 onChangeText={text => {
                   this.setState({ ...this.state, parkingLot: { ...this.state.parkingLot, address: text } });
+                }}
+                />
+            </Item>
+            <Item inlineLabel
+              style={styles.input}
+            >
+              <Icon active name="md-pin" style={{ fontSize: 30, color: '#387ef5' }} />
+              <Input
+                placeholder="Let's update longitude"
+                value={this.state.parkingLot.longitude}
+                onChangeText={text => {
+                  this.setState({ ...this.state, parkingLot: { ...this.state.parkingLot, longitude: text } });
+                }}
+                />
+            </Item>
+            <Item inlineLabel
+              style={styles.input}
+            >
+              <Icon active name="md-pin" style={{ fontSize: 30, color: '#387ef5' }} />
+              <Input
+                placeholder="Let's update latitude"
+                value={this.state.parkingLot.latitude}
+                onChangeText={text => {
+                  this.setState({ ...this.state, parkingLot: { ...this.state.parkingLot, latitude: text } });
+                }}
+                />
+            </Item>
+            <Item inlineLabel
+              style={styles.input}
+            >
+              <Icon active name="md-clipboard" style={{ fontSize: 30, color: '#387ef5' }} />
+              <Input
+                placeholder="Let's update description"
+                value={this.state.parkingLot.description}
+                onChangeText={text => {
+                  this.setState({ ...this.state, parkingLot: { ...this.state.parkingLot, description: text } });
                 }}
                 />
             </Item>
@@ -111,7 +144,7 @@ class EditPark extends Component {
               rounded
               onPress={this._onEdit}
             >
-              <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#fff' }}>submit</Text>
+              <Text style={{ fontSize: 16, color: '#fff' }}>submit</Text>
             </Button>
           </FooterTab>
         </Footer>

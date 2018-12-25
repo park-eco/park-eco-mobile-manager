@@ -78,6 +78,33 @@ class ViewDetail extends Component {
 								style={{ color: COLOR.grey700 }}
 							/>
 						</Item>
+						<Item>
+							<Icon active name="md-pin" style={{ fontSize: 30, color: '#387ef5' }} />
+							<Input
+								placeholder="Let's update longitude"
+								value={this.state.parkingLot.longitude}
+								disabled
+								style={{ color: COLOR.grey700 }}
+							/>
+						</Item>
+						<Item>
+							<Icon active name="md-pin" style={{ fontSize: 30, color: '#387ef5' }} />
+							<Input
+								placeholder="Let's update latitude"
+								value={this.state.parkingLot.latitude}
+								disabled
+								style={{ color: COLOR.grey700 }}
+							/>
+						</Item>
+						<Item>
+							<Icon active name="md-clipboard" style={{ fontSize: 30, color: '#387ef5' }} />
+							<Input
+								placeholder="Let's update description"
+								value={this.state.parkingLot.description}
+								disabled
+								style={{ color: COLOR.grey700 }}
+							/>
+						</Item>
 					</Form>
 				</Content>
 
