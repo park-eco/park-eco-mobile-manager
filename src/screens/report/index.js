@@ -187,8 +187,8 @@ class Report extends Component {
 
 		return (
 			<Container style={styles.container}>
-				{/* <Searchbar
-					title="Report" /> */}
+				<Searchbar
+					title="Report" />
 
 				<View style={{ ...styles.containerFilter, maxHeight: height * 0.25 }}>
 					<View style={styles.rowFilter}>
