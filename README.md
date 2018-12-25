@@ -67,3 +67,6 @@ See also the list of contributors who participated in this project.
 
 # License
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE) file for details
+
+# Design Documentation
+The design documentation is currently in 1 language (Vietnamese) [here](https://drive.google.com/file/d/1h9vPLV3zv5bGFUXuRGKPwWl_H1Qbw0sJ/view?usp=sharing).
