@@ -1,6 +1,6 @@
 import validation from 'validate.js';
 
-export default function validate(fieldName, value) {
+export const validate = (fieldName, value) => {
   var constraints = {
     email: {
       email: true
@@ -28,7 +28,7 @@ export default function validate(fieldName, value) {
     confirmPassword: {
       presence: true,
       equality: 'password'
-    },
+    }
   };
 
   var formValues = {};
@@ -45,4 +45,11 @@ export default function validate(fieldName, value) {
   }
 
   return null;
+}
+
+export const isFloatValue = (value) => {
+  if (validation.isNumber(value))
+    return null;
+
+  return 'must float value';
 }

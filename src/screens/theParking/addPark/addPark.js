@@ -16,7 +16,7 @@ import {
 } from 'native-base';
 import Searchbar from '../../searchbar/searchbar';
 import { COLOR } from 'react-native-material-ui';
-import validate from '../../validation/validate_wrapper'
+import { validate, isFloatValue } from '../../validation/validate_wrapper';
 import { createNewParkingLot } from '../../../actions/parkingLotAction';
 import { StackActions, NavigationActions } from 'react-navigation';
 
@@ -27,26 +27,19 @@ class AddPark extends Component {
         super(props);
         this.state = {
             name: '',
-            nameError: false,
-            // country: '',
-            // countryError: null,
-            // province: '',
-            // provinceError: null,
-            // city: '',
-            // cityError: null,
+            nameError: null,
             address: '',
-            description: '',
+            addressError: null,
             longitude: '',
             longitudeError: null,
             latitude: '',
             latitudeError: null,
+            description: '',
         };
     }
 
     onCreate = () => {
-        if (!this.state.nameError && !this.state.longitudeError && !this.state.latitudeError) {
-            //address = this.state.address + ", " + this.state.city + ", " + this.state.province;
-
+        if (!this.state.nameError && !this.state.addressError && !this.state.longitudeError && !this.state.latitudeError) {
             createNewParkingLot(this.state.name, this.state.address, this.state.description, this.state.longitude, this.state.latitude).then((response) => {
                 if (response == 200) {
                     // navigate and remove from stack
@@ -90,13 +83,14 @@ class AddPark extends Component {
                                     this.setState({ ...this.state, name: text });
                                 }}
                                 onBlur={() => this.setState({
-                                    nameError: validate(true, this.state.name)
+                                    nameError: validate('required', this.state.name)
                                 })}
                             />
-                            {this.state.nameError ? <Text style={{ color: COLOR.red400 }}>{this.state.nameError}</Text> : null}
                         </Item>
+                        {this.state.nameError ? <Text style={{ color: COLOR.red400, textAlign: 'right' }}>{this.state.nameError}</Text> : null}
+
                         <Item floatingLabel
-                            style={!this.state.nameError ? styles.input : styles.inputError}
+                            style={!this.state.addressError ? styles.input : styles.inputError}
                         >
                             <Label style={styles.lableInput}>Address</Label>
                             <Input
@@ -104,10 +98,15 @@ class AddPark extends Component {
                                 onChangeText={text => {
                                     this.setState({ ...this.state, address: text });
                                 }}
+                                onBlur={() => this.setState({
+                                    addressError: validate('required', this.state.address)
+                                })}
                             />
                         </Item>
+                        {this.state.addressError ? <Text style={{ color: COLOR.red400, textAlign: 'right' }}>{this.state.addressError}</Text> : null}
+
                         <Item floatingLabel
-                            style={!this.state.nameError ? styles.input : styles.inputError}
+                            style={!this.state.longitudeError ? styles.input : styles.inputError}
                         >
                             <Label style={styles.lableInput}>Longitude</Label>
                             <Input
@@ -115,10 +114,15 @@ class AddPark extends Component {
                                 onChangeText={text => {
                                     this.setState({ ...this.state, longitude: text });
                                 }}
+                                onBlur={() => this.setState({
+                                    longitudeError: isFloatValue(Number(this.state.longitude)) + validate('required', this.state.longitude)
+                                })}
                             />
                         </Item>
+                        {this.state.longitudeError ? <Text style={{ color: COLOR.red400, textAlign: 'right' }}>{this.state.longitudeError}</Text> : null}
+
                         <Item floatingLabel
-                            style={!this.state.nameError ? styles.input : styles.inputError}
+                            style={!this.state.latitudeError ? styles.input : styles.inputError}
                         >
                             <Label style={styles.lableInput}>Lattitude</Label>
                             <Input
@@ -126,8 +130,13 @@ class AddPark extends Component {
                                 onChangeText={text => {
                                     this.setState({ ...this.state, latitude: text });
                                 }}
+                                onBlur={() => this.setState({
+                                    latitudeError: isFloatValue(Number(this.state.latitude)) + validate('required', this.state.latitude)
+                                })}
                             />
                         </Item>
+                        {this.state.latitudeError ? <Text style={{ color: COLOR.red400, textAlign: 'right' }}>{this.state.latitudeError}</Text> : null}
+
                         <Item floatingLabel
                             style={styles.input}
                         >

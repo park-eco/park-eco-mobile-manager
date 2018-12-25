@@ -13,9 +13,11 @@ import {
 	Thumbnail,
 	View
 } from 'native-base';
+import { Alert } from 'react-native';
 import Searchbar from './../../searchbar/searchbar';
 import { COLOR } from 'react-native-material-ui';
-import { getParkingLot } from './../../../actions/parkingLotAction';
+import { removeParkingLot } from './../../../actions/parkingLotAction';
+import { StackActions, NavigationActions } from 'react-navigation';
 
 import styles from './styles';
 
@@ -30,7 +32,7 @@ class ViewDetail extends Component {
 	componentDidMount() {
 		const parking = this.props.navigation.getParam('parking', null);
 
-		if (name != null) {
+		if (parking != null) {
 			this.setState({ parkingLot: parking });
 		}
 
@@ -38,6 +40,29 @@ class ViewDetail extends Component {
 		// getParkingLot(name).then((response) => {
 		// 	this.setState({ parkingLot: response[0] });
 		// });
+	}
+
+	_onRemove = () => {
+		Alert.alert(
+			'Verify',
+			'Are you sure to remove this parking?',
+			[
+				{ text: 'Cancel', style: 'cancel' },
+				{ text: 'OK', onPress: () => this.remove(), style: 'default' },
+			]
+		)
+	}
+
+	remove = () => {
+		removeParkingLot(this.state.parkingLot.id).then((response) => {
+			if (response == 200) {
+				const resetAction = StackActions.reset({
+					index: 0,
+					actions: [NavigationActions.navigate({ routeName: 'ListPark' })],
+				});
+				this.props.navigation.dispatch(resetAction);
+			}
+		});
 	}
 
 	render() {
@@ -123,6 +148,14 @@ class ViewDetail extends Component {
 							onPress={() => this.props.navigation.navigate('EditPark', { parkingLot: this.state.parkingLot })}
 						>
 							<Text style={{ fontSize: 16, color: '#fff' }}>Edit</Text>
+						</Button>
+					</FooterTab>
+					<FooterTab>
+						<Button
+							rounded
+							onPress={this._onRemove}
+						>
+							<Text style={{ fontSize: 16, color: '#fff' }}>Remove</Text>
 						</Button>
 					</FooterTab>
 				</Footer>

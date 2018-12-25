@@ -7,7 +7,8 @@ import {
     Text,
     Button,
     Thumbnail,
-    View
+    View,
+    Icon
 } from "native-base";
 import { COLOR } from 'react-native-material-ui';
 
@@ -33,11 +34,10 @@ class ItemListPark extends Component {
 
                             <View style={{ justifyContent: 'flex-end' }}>
                                 <View style={{ flexDirection: 'row' }}>
-                                    <Text style={{ color: COLOR.grey600 }}>Name</Text>
                                     <Text> {this.props.name}</Text>
                                 </View>
                                 <View style={{ flexDirection: 'row', marginTop: 12 }}>
-                                    <Text style={{ color: COLOR.grey600 }}>Location</Text>
+                                    <Icon active name="home" style={{ fontSize: 18, color: COLOR.grey600 }} />
                                     <Text> {this.props.location}</Text>
                                 </View>
                             </View>

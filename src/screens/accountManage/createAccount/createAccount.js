@@ -15,7 +15,7 @@ import {
 } from 'native-base';
 import Searchbar from './../../searchbar/searchbar';
 import { COLOR } from 'react-native-material-ui';
-import validate from './../../validation/validate_wrapper'
+import { validate, isFloatValue } from '../../validation/validate_wrapper';
 import { createNewParkingLotAttendant } from './../../../actions/parkingLotAttendant';
 import { StackActions, NavigationActions } from 'react-navigation';
 
