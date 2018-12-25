@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00B1947C952B45CF935C0FD5 /* libRCTRestart.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B9F1AF7303524872803B19EA /* libRCTRestart.a */; };
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
@@ -1117,7 +1116,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-ParkEcoManager/Pods-ParkEcoManager-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-ParkEcoManager/Pods-ParkEcoManager-resources.sh",
 				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -1128,7 +1127,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ParkEcoManager/Pods-ParkEcoManager-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ParkEcoManager/Pods-ParkEcoManager-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BA738B66271066BEE0394F2C /* [CP] Check Pods Manifest.lock */ = {

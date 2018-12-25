@@ -146,13 +146,13 @@ SPEC CHECKSUMS:
   glog: e8acf0ebbf99759d3ff18c86c292a5898282dcde
   Google-Maps-iOS-Utils: c32891ff472eaaa1fca032beedafa1a013af7875
   GoogleMaps: c087b8e5dfe87ca6ebf59adb9b4894a4146bec4f
-  Picker: 67a2566d9ff6b141d505d88b9177f905aaa5f1a6
-  React: 1fe0eb13d90b625d94c3b117c274dcfd2e760e11
-  react-native-google-maps: b946d62e25dc66097921ed82520e45b0b081768a
-  react-native-maps: 066c2afcc89e18726377bcc685315f989ca22449
-  RNSVG: 6252323c0312735f0af5f58b5adf2965b6a9ffbf
-  yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
+  Picker: 37554355aef82a532ea95b71b6eeba66bc86182b
+  React: b4e0982b0ed6a7de90e96cf6fe5cf036aeadd1ec
+  react-native-google-maps: 06d7adbb45aafbad5fd151f9e6f6856f546d7f58
+  react-native-maps: 5a3de82c153db99e5ac939cb2ed576f245514016
+  RNSVG: aeeb222dd9cf2268385306108c20cf364872f5d2
+  yoga: 5e2e4bcf11188977f799b64625dc5913c2aea8fd
 
 PODFILE CHECKSUM: ffd8eefae5aea845fec6ee78300f03d132614e29
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.0.beta.2
