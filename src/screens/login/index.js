@@ -12,7 +12,7 @@ import ForgotPassword from "./forgotPassword";
 import { logIn } from './../../actions/authenticationAction'
 
 const background = require("../../../assets/background-login1.jpg");
-const logo = require("../../../assets/icon-Parking-Systems.jpg");
+const logo = require("../../../assets/icon-Parking-Systems.png");
 
 class Login extends Component {
 	constructor() {
