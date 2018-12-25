@@ -4,18 +4,9 @@ import { Table, Row, Col, TableWrapper } from 'react-native-table-component';
 
 class TableDetail extends Component {
   render() {
-    const tableHead = ['', 'Head1', 'Head2', 'Head3', 'Head4'];
-    const widthHeadArr = [120, 60, 60, 80, 100];
-    const widthTableArr = [60, 60, 80, 100];
-    const tableTitle = ['Title1', 'Title2', 'Title3', 'Title4', 'Title5', 'Title6'];
-    const tableData = [
-      [1, 2, 3, 4],
-      [1, 2, 3, 4],
-      [1, 2, 3, 4],
-      [1, 2, 3, 4],
-      [1, 2, 3, 4],
-      [1, 2, 3, 4],
-    ];
+    const tableHead = ['', 'Numbers Tick', 'Revenue'];
+    const widthHeadArr = [185, 80, 80];
+    const widthTableArr = [80, 80];
 
     return (
       <View>
@@ -26,22 +17,22 @@ class TableDetail extends Component {
                 <Row data={tableHead} widthArr={widthHeadArr} style={styles.header} textStyle={styles.text} />
               </Table>
               <ScrollView style={styles.dataWrapper}>
-              <TableWrapper borderStyle={styles.borderStyle} style={styles.wrapper}>
-              <Col  data={tableTitle} style={styles.title} textStyle={styles.text}/>
-                <Table>
-                  {
-                    tableData.map((rowData, index) => (
-                      <Row
-                        key={index}
-                        data={rowData}
-                        widthArr={widthTableArr}
-                        style={[styles.row, index % 2 && { backgroundColor: '#757575' }]}
-                        textStyle={styles.text}
-                      />
-                    ))
-                  }
-                </Table>
-              </TableWrapper>  
+                <TableWrapper borderStyle={styles.borderStyle} style={styles.wrapper}>
+                  <Col data={this.props.theParkings} style={styles.title} textStyle={styles.text} />
+                  <Table>
+                    {this.props.detailData && (
+                      this.props.detailData.map((rowData, index) => (
+                        <Row
+                          key={index}
+                          data={rowData}
+                          widthArr={widthTableArr}
+                          style={[styles.row, index % 2 && { backgroundColor: '#757575' }]}
+                          textStyle={styles.text}
+                        />
+                      )))
+                    }
+                  </Table>
+                </TableWrapper>
               </ScrollView>
             </View>
           </ScrollView>
