@@ -57,7 +57,7 @@ class Login extends Component {
 						onPress={this.onPress}
 					/>
 				</View>
-				<ForgotPassword style={{ marginTop: 90 }} />
+				<ForgotPassword style={{ marginTop: 40 }} />
 			</Container>
 		);
 	}

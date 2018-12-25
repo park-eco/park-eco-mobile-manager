@@ -65,11 +65,13 @@ class SideBar extends Component {
   }
 
   _logout = () => {
+    this.props.navigation.navigate('Login');
+    
     const resetAction = StackActions.reset({
 			index: 0,
 			actions: [NavigationActions.navigate({ routeName: 'Login' })],
 		});
-		this.props.navigation.dispatch(resetAction);
+    this.props.navigation.dispatch(resetAction);
   }
 
   componentDidMount() {
@@ -127,7 +129,7 @@ class SideBar extends Component {
               </ListItem>}
           />
 
-          <ListItem style={{ marginTop: 150 }}>
+          <ListItem style={{ marginTop: 90 }}>
             <Left>
               <Icon
                 active
