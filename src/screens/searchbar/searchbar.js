@@ -5,9 +5,6 @@ import { Toolbar } from 'react-native-material-ui';
 // withNavigation is a function to provide the navigation prop automatically (through React context, if you're curious)
 import { withNavigation } from 'react-navigation'; 
 
-// const this.props.iconIncrease = "trending-up";
-// const this.props.iconDecrease = "trending-down";
-
 class Searchbar extends Component {
     constructor(props) {
         super(props);
