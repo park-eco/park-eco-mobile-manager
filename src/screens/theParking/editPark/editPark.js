@@ -97,8 +97,8 @@ class EditPark extends Component {
           </Form>
         </Content>
 
-        <Footer style={{ backgroundColor: COLOR.blue400 }}>
-          <FooterTab>
+        <Footer>
+          <FooterTab style={styles.footerTab}>
             <Button
               rounded
               onPress={() => this.props.navigation.goBack()}
@@ -106,7 +106,7 @@ class EditPark extends Component {
               <Text style={{ fontSize: 16, color: '#fff' }}>cancel</Text>
             </Button>
           </FooterTab>
-          <FooterTab>
+          <FooterTab style={styles.footerTab}>
             <Button
               rounded
               onPress={this._onEdit}

@@ -47,7 +47,7 @@ class ListAccount extends Component {
 					sortDecrease={this.sortByNameZA}
 					iconIncrease="sort-by-alpha"
 					iconDecrease="sort-by-alpha"
-					title="Human Resource" />
+					title="Parking Lot" />
 
 				<Content>
 					{this.state.data.map(data => {
@@ -62,8 +62,8 @@ class ListAccount extends Component {
 					})}
 				</Content>
 
-				<Footer style={{ backgroundColor: COLOR.blue400 }}>
-					<FooterTab>
+				<Footer>
+					<FooterTab style={styles.footerTab}>
 						<Button
 							rounded
 							onPress={() => this.props.navigation.navigate('AddPark')}

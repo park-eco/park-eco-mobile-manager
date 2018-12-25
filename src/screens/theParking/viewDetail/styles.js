@@ -4,4 +4,7 @@ export default {
       backgroundColor: '#fff',
       justifyContent: 'space-between'
   },
+  footerTab: {
+    backgroundColor: '#387ef5',
+  }
 };

@@ -15,7 +15,7 @@ export default {
     lableInput: {
         color: '#387ef5',
     },
-    footer: {
+    footerTab: {
         backgroundColor: '#387ef5',
     }
 };

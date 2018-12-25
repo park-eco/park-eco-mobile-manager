@@ -143,8 +143,8 @@ class AddPark extends Component {
                     </Form>
                 </Content>
 
-                <Footer style={styles.footer}>
-                    <FooterTab>
+                <Footer >
+                    <FooterTab style={styles.footerTab}>
                         <Button
                             rounded
                             onPress={() => this.props.navigation.navigate('ListPark')}
@@ -152,7 +152,7 @@ class AddPark extends Component {
                             <Text style={{ fontSize: 16, color: '#fff' }}>cancel</Text>
                         </Button>
                     </FooterTab>
-                    <FooterTab>
+                    <FooterTab style={styles.footerTab}>
                         <Button
                             rounded
                             onPress={this.onCreate}
