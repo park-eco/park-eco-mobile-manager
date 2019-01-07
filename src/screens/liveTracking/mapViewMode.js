@@ -328,7 +328,7 @@ class MapViewMode extends Component {
                         { scale: markerScale },
                       ],
                     }}
-                    amount={marker.status}
+                    amount={marker.currentCount / marker.maximumCapacity}
                     selected={selected}
                   />
                 </Marker>
@@ -356,11 +356,12 @@ class MapViewMode extends Component {
                     ],
                   }]}
                 >
-                  <ItemListView 
+                  <ItemListView
                     style={{ backgroundColor: 'transparent' }}
                     key={marker.id}
                     nameTheParking={marker.nameTheParking}
-                    status={marker.status}
+                    current={marker.currentCount}
+                    max={marker.maximumCapacity}
                     nameWorkingEmployee={marker.nameWorkingEmployee}
                     phoneNumberWorkingEmployee={marker.phoneNumberWorkingEmployee}>
                   </ItemListView>

@@ -31,6 +31,7 @@ class ItemListView extends Component {
 	}
 
 	render() {
+		const statusPer = parseFloat(this.props.current / this.props.max);
 		return (
 			<Card style={this.props.style}>
 				<CardItem style={this.props.style}>
@@ -40,11 +41,11 @@ class ItemListView extends Component {
 								<Text>Status</Text>
 							</Left>
 							<Body>
-								<Text>{this.props.status}%</Text>
+								<Text>{this.props.current}/{this.props.max}</Text>
 							</Body>
 							<Right>
 								<Icon active name="circle" type="FontAwesome" 
-											style={{ color: (this.props.status < 50) ? COLOR.green500 : ( (this.props.status < 80) ? COLOR.yellow500 : COLOR.red500 ) }} />
+											style={{ color: (statusPer < 0.5) ? COLOR.green500 : ( (statusPer < 0.8) ? COLOR.yellow500 : COLOR.red500 ) }} />
 							</Right>
 						</ListItem>
 						<ListItem icon>

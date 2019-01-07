@@ -8,67 +8,64 @@ import {
   Icon,
 
 } from "native-base";
+import { getAllParkingLots } from '../../actions/parkingLotAction';
 
 import styles from "./styles";
 
 import ItemListView from "./itemListView";
-import Searchbar from "./../searchbar/searchbar";
+import Searchbar from "../searchbar/searchbar";
 import MapViewMode from "./mapViewMode";
+
+const names = ['Yoda', 'Harry', 'Captain Kirk', 'Spock', 'Arnold', 'Gandalf', 'Magneto', 'Tony Stark', 'Bilbo', 'Obi Wan'];
+
 
 class LiveTracking extends Component {
   constructor() {
     super();
     this.state = {
       activeTab: "listViewMode",
-      data: [{
-        id: "1",
-        nameTheParking: "Công viên Hoàng Văn Thụ",
-        status: 20,
-        idWorkingEmployee: "333",
-        nameWorkingEmployee: "Lee Khai",
-        phoneNumberWorkingEmployee: "0328372201",
-        coordinate: {
-          latitude: 10.777956,
-          longitude: 106.694605,
-        },
-      },
-      {
-        id: "2",
-        nameTheParking: "Công viên Văn hoá Đầm Sen",
-        status: 95,
-        idWorkingEmployee: "334",
-        nameWorkingEmployee: "Vo Ngoc",
-        phoneNumberWorkingEmployee: "0328372202",
-        coordinate: {
-          latitude: 10.787401,
-          longitude: 106.693692,
-        },
-      },
-      {
-        id: "3",
-        nameTheParking: "Trường Đại học Công nghệ Thông tin, Đại học Quốc gia Thành phố Hồ Chí Minh",
-        status: 20,
-        idWorkingEmployee: "335",
-        nameWorkingEmployee: "Huynh Kim",
-        phoneNumberWorkingEmployee: "0328372203",
-        coordinate: {
-          latitude: 10.789098,
-          longitude: 106.704493,
-        },
-      },
-      {
-        id: "4",
-        nameTheParking: "Siêu thị Co.opXtra Thủ Đức",
-        status: 70,
-        idWorkingEmployee: "336",
-        nameWorkingEmployee: "Lee Tuan",
-        phoneNumberWorkingEmployee: "0328372204",
-        coordinate: {
-          latitude: 10.789098,
-          longitude: 106.714493,
-        },
-      }]
+      data: []
     };
+  }
+
+  random() {
+    return parseFloat((Math.random() * (-0.05 - 0.05) + 0.05).toFixed(5));
+  }
+
+  async componentDidMount() {
+    getAllParkingLots().then((response) => {
+      response.forEach((parking, index) => {
+        parking.attendantAssignments = index;
+        parking.nameWorkingEmployee = names[index];
+        parking.phoneNumberWorkingEmployee = "0328372204";
+        parking.coordinate = {
+          latitude: parseFloat((10.789098 + this.random()).toFixed(5)),
+          longitude: parseFloat((106.714493 + this.random()).toFixed(5)),
+        }
+      });
+
+      this.setState({ data: response });
+    });
+
+    try {
+      setInterval(async () => {
+        getAllParkingLots().then((response) => {
+          response.forEach((parking, index) => {
+            parking.attendantAssignments = index;
+            parking.nameWorkingEmployee = names[index];
+            parking.phoneNumberWorkingEmployee = "0328372204";
+            parking.coordinate = {
+              latitude: parseFloat((10.789098 + this.random()).toFixed(5)),
+              longitude: parseFloat((106.714493 + this.random()).toFixed(5)),
+            }
+          });
+
+          this.setState({ data: response });
+        });
+      }, 5000);
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   sortByStatusIncrease = () => {
@@ -126,8 +123,9 @@ class LiveTracking extends Component {
             {this.state.data.map(data => {
               return (
                 <ItemListView key={data.id}
-                  nameTheParking={data.nameTheParking}
-                  status={data.status}
+                  nameTheParking={data.name}
+                  current={data.currentCount}
+                  max={data.maximumCapacity}
                   nameWorkingEmployee={data.nameWorkingEmployee}
                   phoneNumberWorkingEmployee={data.phoneNumberWorkingEmployee}>
                 </ItemListView>

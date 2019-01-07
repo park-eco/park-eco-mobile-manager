@@ -16,7 +16,7 @@ const theParkings = ['All Parkings', 'Suối Tiên', 'Đầm Sen', 'CV Lê Thị
 
 // Mock data object used for LineChart and BarChart
 const data = {
-  labels: ['Suối Tiên', 'Đầm Sen', 'CV Lê Thị Riêng', 'Coop Extra Linh Trung', 'Phố đi bộ Nguyễn Huệ'],
+  labels: ['1', '2', '3', '4', '5'],
   datasets: [{
     data: [
       Math.random() * 100,
